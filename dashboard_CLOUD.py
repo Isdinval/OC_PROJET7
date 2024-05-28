@@ -165,8 +165,14 @@ feature_names = feature_names_from_Model
 # Load the test data
 @st.cache_data()   # Cache the test data to avoid reloading
 def load_test_data():
-    # Load the customer data from the CSV file
-    return pd.read_csv("C:/Users/Olivi/OneDrive/Documents/OC_Formation_DATA_SCIENCE/PROJET7_Implementez_un_modele_de_scoring/DATA/application_test.csv")
+    url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/application_test.csv'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return pd.read_csv(StringIO(response.text))
+    else:
+        st.error("Failed to load data from GitHub.")
+        return None
+    return feature_names
 
 
 customer_data = load_test_data()
