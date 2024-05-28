@@ -128,7 +128,7 @@ def shap_values_to_dataframe_instance(shap_values, feature_names, instance_index
 
 
 # Define functions to load model and retrieve SHAP values
-@st.cache_resource()  # Cache the model to avoid reloading
+# @st.cache_resource()  # Cache the model to avoid reloading
 def load_model():
     # LOCAL
     # # Set the MLflow tracking URI (update with your server URI if necessary)
@@ -166,7 +166,7 @@ def load_model():
         return None
 
 
-@st.cache_data()  # Cache the feature names to avoid reloading
+# @st.cache_data()  # Cache the feature names to avoid reloading
 def retrieve_feature_names():
     # Retrieve feature names
     feature_names_path = get_mlflow_artifact("125eb9d11dee491285c5fb6ae3cbd819", "feature_names/feature_names.txt")
