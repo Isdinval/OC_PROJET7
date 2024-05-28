@@ -172,17 +172,7 @@ def load_test_data():
     url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/application_test.csv'
     response = requests.get(url)
     if response.status_code == 200:
-        # Read the text content
-        data_text = response.text
-    
-        # Remove double quotes from each line
-        lines = [line.strip().replace('"', '') for line in data_text.splitlines()]
-    
-        # Create a StringIO object from the modified data
-        data_text = "\n".join(lines)
-        data_stream = StringIO(data_text)
-        # Read the CSV data using pandas
-        return pd.read_csv(data_stream, delimiter=",")
+        return pd.read_csv(StringIO(response.text), delimiter=",")
     else:
         st.error("Failed to load data from GitHub.")
         return None
