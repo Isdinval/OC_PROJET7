@@ -138,13 +138,33 @@ def load_model():
     # # Load the model using the appropriate method
     # model = mlflow.sklearn.load_model(model_uri)
 
+    # return model
 
     # FROM REGISTERED MODEL
-    model_name = "XGBOOST_TUNED_FOR_STREAMLIT_CLOUD"
-    model_version = 1
-    model = mlflow.pyfunc.load_model(model_uri=f"models:/{model_name}/{model_version}")
 
+    model_name = "XGBOOST_TUNED_FOR_STREAMLIT_CLOUD"
+    
+    # Check if model exists
+    try:
+    registered_models = mlflow.list_registered_models()
+    if model_name not in [model.name for model in registered_models]:
+      raise MlflowException(f"Model '{model_name}' not found in Model Registry")
+    except MlflowException as e:
+    print(f"Error checking models: {e}")
+    return None
+    
+    # Get latest version (adjust if needed)
+    latest_version = mlflow.list_model_versions(name=model_name)[0].version
+    
+    # Load model using URI
+    model_uri = f"models:/{model_name}/{latest_version}"
+    try:
+    model = mlflow.pyfunc.load_model(model_uri=model_uri)
     return model
+    except MlflowException as e:
+    print(f"Error loading model: {e}")
+    return None
+
 
 @st.cache_data()  # Cache the feature names to avoid reloading
 def retrieve_feature_names():
