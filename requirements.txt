@@ -3,6 +3,5 @@ pandas
 streamlit
 numpy
 shap
-os
 matplotlib
 scikit-learn 
