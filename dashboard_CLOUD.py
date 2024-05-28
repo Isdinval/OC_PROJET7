@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import mlflow
+import mlflow.pyfunc
 import pandas as pd
 import streamlit as st
 import numpy as np
@@ -140,7 +141,8 @@ def load_model():
 
     # FROM REGISTERED MODEL
     model_name = "XGBOOST_TUNED_FOR_STREAMLIT_CLOUD"
-    loaded_model = mlflow.model.MlflowModel.load_model(model_name)     # Load the latest version by default
+    model_version = 1
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{model_name}/{model_version}")
 
     return model
 
