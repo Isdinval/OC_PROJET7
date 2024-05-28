@@ -169,6 +169,8 @@ model = load_model()
 feature_names_from_Model = retrieve_feature_names()
 feature_names = feature_names_from_Model
 
+st.write(feature_names)
+
 # Load the test data
 @st.cache_data()   # Cache the test data to avoid reloading
 def load_test_data():
@@ -185,10 +187,10 @@ def load_test_data():
 
 
 customer_data = load_test_data()
+st.write(customer_data)
 
-# Retrieve optimal threshold from MLflow
-with mlflow.start_run(run_id='0ed1a80c72d842cf98d5676162b7d215') as run:
-    optimal_threshold = run.data.metrics['.optimal_threshold']
+# Optimal threshold from MLflow
+optimal_threshold = 0.636364
 
 
   
