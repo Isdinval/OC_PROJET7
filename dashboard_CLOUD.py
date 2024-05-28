@@ -228,9 +228,9 @@ def get_final_estimator(pipeline):
 
   return final_estimator #final_estimator
   
-      st.write("customer_data")
-    st.write(customer_data)
-  
+
+st.write("customer_data")
+st.write(customer_data)  
     
 # Streamlit app code
 def main():
