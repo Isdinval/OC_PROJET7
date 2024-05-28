@@ -129,12 +129,19 @@ def shap_values_to_dataframe_instance(shap_values, feature_names, instance_index
 # Define functions to load model and retrieve SHAP values
 @st.cache_resource()  # Cache the model to avoid reloading
 def load_model():
-    # Set the MLflow tracking URI (update with your server URI if necessary)
-    mlflow.set_tracking_uri("http://localhost:5000")
-    # Define the model URI from the provided information
-    model_uri = 'runs:/0ed1a80c72d842cf98d5676162b7d215/model'
-    # Load the model using the appropriate method
-    model = mlflow.sklearn.load_model(model_uri)
+    # LOCAL
+    # # Set the MLflow tracking URI (update with your server URI if necessary)
+    # mlflow.set_tracking_uri("http://localhost:5000")
+    # # Define the model URI from the provided information
+    # model_uri = 'runs:/0ed1a80c72d842cf98d5676162b7d215/model'
+    # # Load the model using the appropriate method
+    # model = mlflow.sklearn.load_model(model_uri)
+
+
+    # FROM REGISTERED MODEL
+    model_name = "XGBOOST_TUNED_FOR_STREAMLIT_CLOUD"
+    loaded_model = mlflow.model.MlflowModel.load_model(model_name)     # Load the latest version by default
+
     return model
 
 @st.cache_data()  # Cache the feature names to avoid reloading
