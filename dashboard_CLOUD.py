@@ -147,17 +147,13 @@ def load_model():
 
 # @st.cache_data()  # Cache the feature names to avoid reloading
 def retrieve_feature_names():
-    # Retrieve feature names
-    feature_names_path = get_mlflow_artifact("125eb9d11dee491285c5fb6ae3cbd819", "feature_names/feature_names.txt")
-    feature_names = None
-    # Handle potential errors during artifact retrieval
-    if feature_names_path and os.path.exists(feature_names_path):
-        # Read the feature names from the file
-        with open(feature_names_path, "r") as f:
-            feature_names = f.read().strip().split("\n")
+    url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/feature_names.txt'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return pd.read_csv(StringIO(response.text))
     else:
-        st.error("Failed to retrieve feature names from MLflow artifacts.")
-        feature_names = []  # Set an empty list as a placeholder
+        st.error("Failed to load data from GitHub.")
+        return None
     return feature_names
 
 
