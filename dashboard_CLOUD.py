@@ -174,7 +174,7 @@ def load_test_data():
     st.write(url)
     st.write(response)
     if response.status_code == 200:
-        return pd.read_csv(StringIO(response.text), delimiter=","))
+        return pd.read_csv(StringIO(response.text), delimiter=",")
     else:
         st.error("Failed to load data from GitHub.")
         return None
