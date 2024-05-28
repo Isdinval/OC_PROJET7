@@ -174,16 +174,12 @@ def load_test_data():
     if response.status_code == 200:
         # Read the text content
         data_text = response.text
-    
-        # Remove double quotes from each line
-        lines = [line.strip().replace('"', '') for line in data_text.splitlines()]
-    
-        # Create a StringIO object from the modified data
-        data_text = "\n".join(lines)
+      
+        # Create a StringIO object from the data
         data_stream = StringIO(data_text)
-    
-        # Read the CSV data using pandas
-        return pd.read_csv(data_stream, delimiter=",")
+      
+        # Read the CSV data using pandas with quotechar
+        return pd.read_csv(data_stream, delimiter=",", quotechar='"')
         # return pd.read_csv(StringIO(response.text), delimiter=",")
     else:
         st.error("Failed to load data from GitHub.")
