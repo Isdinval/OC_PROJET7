@@ -167,6 +167,8 @@ feature_names = feature_names_from_Model
 def load_test_data():
     url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/application_test.csv'
     response = requests.get(url)
+    st.write(url)
+    st.write(response)
     if response.status_code == 200:
         return pd.read_csv(StringIO(response.text))
     else:
