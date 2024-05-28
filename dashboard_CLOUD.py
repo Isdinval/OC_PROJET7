@@ -144,16 +144,13 @@ def load_model():
 
     model_name = "XGBOOST_TUNED_FOR_STREAMLIT_CLOUD"
     
-    # Check if model exists
-    registered_models = mlflow.list_registered_models()
-    st.write(registered_models)
 
-    
     # Get latest version (adjust if needed)
-    latest_version = mlflow.list_model_versions(name=model_name)[0].version
+    latest_version = 1
     
     # Load model using URI
     model_uri = f"models:/{model_name}/{latest_version}"
+    st.write(model_uri)
 
     model = mlflow.pyfunc.load_model(model_uri=model_uri)
     return model
