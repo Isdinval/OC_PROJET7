@@ -182,10 +182,12 @@ def load_test_data():
 
 # Load the model and SHAP values
 model = load_model()
+st.write(model)
+
 feature_names_from_Model = retrieve_feature_names()
 feature_names = feature_names_from_Model
-
 st.write(feature_names)
+
 customer_data = load_test_data()
 st.write("customer_data")
 st.write(customer_data)  
