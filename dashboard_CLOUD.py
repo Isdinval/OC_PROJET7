@@ -15,6 +15,9 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, FunctionTransformer
 
+import requests
+from io import StringIO
+
 
 st.write('IM HERE')
 
