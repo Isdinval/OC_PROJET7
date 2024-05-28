@@ -143,7 +143,7 @@ def load_model():
     model = mlflow.pyfunc.load_model(model_uri=model_uri)
     return model
   except MlflowException as e:
-    print(f"Error loading model: {e}")
+    st.error(f"Error loading model: {e}")
     return None
 
 
@@ -182,10 +182,12 @@ def load_test_data():
 
 # Load the model and SHAP values
 model = load_model()
+st.write("MODEL")
 st.write(model)
 
 feature_names_from_Model = retrieve_feature_names()
 feature_names = feature_names_from_Model
+st.write("feature_names")
 st.write(feature_names)
 
 customer_data = load_test_data()
