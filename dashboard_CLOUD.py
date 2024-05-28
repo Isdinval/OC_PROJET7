@@ -14,7 +14,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, FunctionTransformer
 
 
-           
+st.write('IM HERE')
+
 def preprocess_dataframe(df):
     """
     Preprocesses the input DataFrame (df) for machine learning tasks.
