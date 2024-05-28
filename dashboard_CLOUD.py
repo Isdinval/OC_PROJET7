@@ -164,12 +164,7 @@ def retrieve_feature_names():
         return None
 
 
-# Load the model and SHAP values
-model = load_model()
-feature_names_from_Model = retrieve_feature_names()
-feature_names = feature_names_from_Model
 
-st.write(feature_names)
 
 # Load the test data
 @st.cache_data()   # Cache the test data to avoid reloading
@@ -179,15 +174,22 @@ def load_test_data():
     st.write(url)
     st.write(response)
     if response.status_code == 200:
-        return pd.read_csv(StringIO(response.text))
+        return pd.read_csv(StringIO(response.text), delimiter=","))
     else:
         st.error("Failed to load data from GitHub.")
         return None
     return feature_names
 
 
+
+# Load the model and SHAP values
+model = load_model()
+feature_names_from_Model = retrieve_feature_names()
+feature_names = feature_names_from_Model
+
+st.write(feature_names)
 customer_data = load_test_data()
-st.write(customer_data)
+
 
 # Optimal threshold from MLflow
 optimal_threshold = 0.636364
@@ -226,7 +228,8 @@ def get_final_estimator(pipeline):
 
   return final_estimator #final_estimator
   
-  
+      st.write("customer_data")
+    st.write(customer_data)
   
     
 # Streamlit app code
@@ -246,7 +249,8 @@ def main():
     """
     st.write(explainability_sections)
 
-    
+
+
     # Input field for SK_ID_CURR
     sk_id_curr = st.number_input('Enter SK_ID_CURR (ex: 100001 or 101268):', min_value=customer_data['SK_ID_CURR'].min(), max_value=customer_data['SK_ID_CURR'].max())
 
