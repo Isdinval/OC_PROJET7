@@ -153,11 +153,15 @@ def retrieve_feature_names():
     url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/feature_names.txt'
     response = requests.get(url)
     if response.status_code == 200:
-        return pd.read_csv(StringIO(response.text))
+        # Read the text content of the response
+        text_data = response.text
+    
+        # Split the text by line breaks to get individual feature names
+        feature_names = text_data.splitlines()
+        return feature_names
     else:
         st.error("Failed to load data from GitHub.")
         return None
-    return feature_names
 
 
 # Load the model and SHAP values
