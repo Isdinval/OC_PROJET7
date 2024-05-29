@@ -134,17 +134,15 @@ def shap_values_to_dataframe_instance(shap_values, feature_names, instance_index
 # Define functions to load model and retrieve SHAP values
 # @st.cache_resource()  # Cache the model to avoid reloading
 def load_model():
-  model_name = "XGBOOST_TUNED_FOR_STREAMLIT_CLOUD"
-  model_version = 2  # Specify the desired version
-
-  # Load model using model name and version
-  model_uri = f"models:/{model_name}/{model_version}"
-  try:
-    model = mlflow.pyfunc.load_model(model_uri=model_uri)
+    # Set the MLflow tracking URI (update with your server URI if necessary)
+    mlflow.set_tracking_uri("https://dagshub.com/Isdinval/OC_PROJET7.mlflow")
+    # Define the model URI from the provided information
+    model_uri = 'runs:/19e1265fed5543db8878f67479e4f60b/model'
+    # Load the model using the appropriate method
+    model = mlflow.sklearn.load_model(model_uri)
     return model
-  except MlflowException as e:
-    st.error(f"Error loading model: {e}")
-    return None
+
+
 
 
 
