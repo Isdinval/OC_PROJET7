@@ -19,7 +19,6 @@ import requests
 from io import StringIO
 
 
-st.write('IM HERE')
 
 def preprocess_dataframe(df):
     """
@@ -179,17 +178,13 @@ def load_test_data():
 
 # Load the model and SHAP values
 model = load_model()
-st.write("MODEL")
-st.write(model)
 
+# Load FEATURE NAMES
 feature_names_from_Model = retrieve_feature_names()
 feature_names = feature_names_from_Model
-st.write("feature_names")
-st.write(feature_names)
 
+# Load Test DATA
 customer_data = load_test_data()
-st.write("customer_data")
-st.write(customer_data)  
 
 # Optimal threshold from MLflow
 optimal_threshold = 0.636364
