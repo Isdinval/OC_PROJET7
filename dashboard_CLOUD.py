@@ -239,7 +239,7 @@ def main():
     MODEL EXPLANATION:
     --    
     This loan approval prediction model is an XGBoost classifier. XGBoost stands for eXtreme Gradient Boosting, a powerful machine learning algorithm that combines the strengths of multiple decision trees to make more accurate predictions. It's known for its efficiency, scalability, and ability to handle complex relationships between features.
-    The model analyzes various customer attributes, such as income, credit history, and debt-to-income ratio, to estimate the probability of loan default. The model's output is a probability score between 0 and 1, where a higher score indicates a greater risk of the borrower defaulting on the loan.
+    The model analyzes various customer attributes, such as income, credit history, and debt-to-income ratio, to estimate the probability of loan default. The model's output is a probability score between 0% and 100%, where a lower score indicates a greater risk of the borrower defaulting on the loan.
     """
     st.write(explainability_sections)
 
