@@ -131,8 +131,7 @@ def shap_values_to_dataframe_instance(shap_values, feature_names, instance_index
     return df_feature_importance
 
 
-# Define functions to load model and retrieve SHAP values
-# @st.cache_resource()  # Cache the model to avoid reloading
+@st.cache_resource()  
 def load_model():
     # Set the MLflow tracking URI (update with your server URI if necessary)
     mlflow.set_tracking_uri("https://dagshub.com/Isdinval/OC_PROJET7.mlflow")
@@ -146,7 +145,7 @@ def load_model():
 
 
 
-# @st.cache_data()  # Cache the feature names to avoid reloading
+@st.cache_data()  # Cache the feature names to avoid reloading
 def retrieve_feature_names():
     url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/feature_names.txt'
     response = requests.get(url)
