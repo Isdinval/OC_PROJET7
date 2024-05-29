@@ -4,4 +4,6 @@ streamlit
 numpy
 shap
 matplotlib
-scikit-learn 
+scikit-learn
+xgboost
+scipy
