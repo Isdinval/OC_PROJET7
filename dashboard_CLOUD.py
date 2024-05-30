@@ -201,7 +201,7 @@ def make_prediction(input_data, model, optimal_threshold):
     if isinstance(probability_class1, np.ndarray):
         probability_class1 = probability_class1[0]
     # Convert probability to human-readable format
-    prediction_label = "Accepted" if probability_class1 >= optimal_threshold else "Refused"
+    prediction_label = "Refused" if probability_class1 >= optimal_threshold else "Accepted"
     return probability_class1, prediction_label
   
 def get_final_estimator(pipeline):
@@ -295,10 +295,10 @@ def main():
         if isinstance(probability_class1, np.ndarray):
             probability_class1 = probability_class1[0]
         # Convert probability to human-readable format
-        prediction_label = "Accepted" if probability_class1 >= optimal_threshold else "Refused"
+        prediction_label = "Refused" if probability_class1 >= optimal_threshold else "Accepted"
         # Display prediction result and probability
         st.markdown("---")
-        st.write(f"The probability of non-default on the loan is estimated to be {probability_class1 * 100:.2f}% (Threshold: {optimal_threshold * 100:.2f}%).")
+        st.write(f"The probability of default on the loan is estimated to be {probability_class1 * 100:.2f}% (Threshold: {optimal_threshold * 100:.2f}%).")
 
         if prediction_label == "Accepted":
             st.markdown("<p style='text-align: center; font-size: 40px; color: green;'>The loan application is approved.</p>", unsafe_allow_html=True)
