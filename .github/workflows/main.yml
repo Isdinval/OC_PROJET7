@@ -26,8 +26,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-          pip install -r requirements.txt  # Install dependencies
-
       - name: III. Run Unit Tests
         # Option 1: Execute specific test file
         run: |
