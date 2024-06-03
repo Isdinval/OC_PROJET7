@@ -1,0 +1,40 @@
+name: Unit Testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:  # Optional: Add unit testing on pull requests
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Adjust OS if needed
+
+    steps:
+      - uses: actions/checkout@v3  # Latest version for potential improvements
+
+      - name: Set up Python version
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'  # Replace with your required version
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv  # Create virtual environment
+          source venv/bin/activate  # Activate it
+
+          pip install -r requirements.txt  # Install dependencies
+
+      - name: Run Unit Tests
+        # Option 1: Execute specific test file
+        run: |
+          python dashboard_CLOUD_with_UNIT_TESTING.py
+
+        # Option 2: Run all tests in 'tests' directory (if applicable)
+        # run: |
+        #   python -m unittest tests
+
+      - name: Upload coverage report (optional)  # Requires coverage tool
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: coverage/  # Replace with your coverage report path
