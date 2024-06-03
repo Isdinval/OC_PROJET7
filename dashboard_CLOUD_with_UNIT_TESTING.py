@@ -46,21 +46,6 @@ def load_test_data():
 
 
 
-# Load the model and SHAP values
-model = load_model()
-
-# Load FEATURE NAMES
-feature_names_from_Model = retrieve_feature_names()
-feature_names = feature_names_from_Model
-
-# Load Test DATA
-customer_data = load_test_data()
-
-# Optimal threshold from MLflow
-optimal_threshold = 0.636364
-
-
-
 # =========================================================================
 # UNIT TESTS (USING UNITTEST)
 # =========================================================================       
