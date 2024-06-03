@@ -4,8 +4,47 @@ import requests
 import unittest
 import unittest.mock
 
-     
-        
+# =========================================================================
+# INITIAL FUNCTIONS
+# =========================================================================           
+@st.cache_resource()  
+def load_model():
+    # Set the MLflow tracking URI (update with your server URI if necessary)
+    mlflow.set_tracking_uri("https://dagshub.com/Isdinval/OC_PROJET7.mlflow")
+    # Define the model URI from the provided information
+    model_uri = 'runs:/19e1265fed5543db8878f67479e4f60b/model'
+    # Load the model using the appropriate method
+    model = mlflow.sklearn.load_model(model_uri)
+    return model
+# Load the test data
+@st.cache_data()   # Cache the test data to avoid reloading
+def load_test_data():
+    url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/application_test.csv'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return pd.read_csv(StringIO(response.text), delimiter=",")
+    else:
+        st.error("Failed to load data from GitHub.")
+        return None
+    return feature_names
+
+
+
+# Load the model and SHAP values
+model = load_model()
+
+# Load FEATURE NAMES
+feature_names_from_Model = retrieve_feature_names()
+feature_names = feature_names_from_Model
+
+# Load Test DATA
+customer_data = load_test_data()
+
+# Optimal threshold from MLflow
+optimal_threshold = 0.636364
+
+
+
 # =========================================================================
 # UNIT TESTS (USING UNITTEST)
 # =========================================================================       
