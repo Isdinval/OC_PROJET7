@@ -30,13 +30,3 @@ jobs:
         # Option 1: Execute specific test file
         run: |
           python dashboard_CLOUD_with_UNIT_TESTING.py
-
-        # Option 2: Run all tests in 'tests' directory (if applicable)
-        # run: |
-        #   python -m unittest tests
-
-      - name: IV. Upload coverage report (optional)  # Requires coverage tool
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-report
-          path: coverage/  # Replace with your coverage report path
