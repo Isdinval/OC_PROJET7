@@ -14,10 +14,11 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, FunctionTransformer
-import plotly.express as px
 
 import requests
 from io import StringIO
+from plotly.graph_objects import go
+
 
 
 
@@ -423,17 +424,17 @@ def main():
             gauge_color = "red"  # Red for declined loans
         
         # Create gauge chart
-        fig = px.indicator(
-            gauge_data,
-            value="score",
+        fig = go.Figure(go.Indicator(
+            value=gauge_data["score"],
             domain={"min": 0, "max": 100},  # Set gauge range 0-100%
             title=gauge_title,
-            mode="gauge+number+delta",  # Display score, threshold, and delta
-            delta={'reference': optimal_threshold * 100, 'increasing':'', 'decreasing':''},  # Customize delta display (optional)
+            mode="number+delta",  # Display score and delta (optional)
+            delta={'reference': gauge_data["threshold"], 'increasing':'', 'decreasing':''},  # Customize delta display (optional)
             gauge_shape="circular",  # Circular gauge
+            axis_range=[0, 100],  # Set axis range for gauge
             color="dark",  # Dark background for gauge
             bar_color=gauge_color  # Set bar color based on score
-        )
+        ))
 
 
 
