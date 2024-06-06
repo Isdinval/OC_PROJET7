@@ -320,44 +320,60 @@ def main():
        
         # Get all features (assuming numerical features)
         all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
-         
         # Filter controls
         selected_feature = st.selectbox('Select Feature:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))  # Set default
 
         # Filter data based on selected feature
         filtered_data = customer_data_copy.copy() # Avoid modifying original data
          
-        # Separate data for full dataset and current customer
-        full_data_values = np.array(customer_data_copy[selected_feature])
-        customer_value = customer_data_copy[selected_feature].iloc[customer_index]
 
-
-        # Create bins (adjust number of bins as needed)
-
-        bins = np.linspace(filtered_data[selected_feature].min(), filtered_data[selected_feature].max(), 10)  # 10 bins
-        # Calculate bin width (assuming equally spaced bins)
-        bin_width = bins[1] - bins[0]
-
-        # Count data points within each bin for all customers and the selected customer
-        counts_all, bins_all = np.histogram(filtered_data[selected_feature], bins=bins)
-        count_customer, _ = np.histogram(filtered_data[selected_feature].iloc[customer_index], bins=bins)
-
+        # Check for categorical feature
+        if customer_data_copy[selected_feature].dtype == 'object':  # Adjust for categorical data type
+            # Categorical feature: Use value counts
+            counts_all = customer_data_copy[selected_feature].value_counts().sort_values(ascending=False)
+            categories = counts_all.index.to_numpy()  # Get category labels
+            counts = counts_all.to_numpy()
+        else:
+            # Numerical feature: Use histogram
+            filtered_data = customer_data_copy.copy()  # Avoid modifying original data
+            full_data_values = np.array(customer_data_copy[selected_feature])
+            customer_value = customer_data_copy[selected_feature].iloc[customer_index]
         
-        # Find the bin index for the customer value
-        customer_bin_index = np.digitize(customer_value, bins=bins) - 1  # Adjust for zero-based indexing
-
-        # Create bar chart with bins and log scale on y-axis
+            # Create bins (adjust number of bins as needed)
+            bins = np.linspace(filtered_data[selected_feature].min(), filtered_data[selected_feature].max(), 10)  # 10 bins
+            # Calculate bin width (assuming equally spaced bins)
+            bin_width = bins[1] - bins[0]
+        
+            # Count data points within each bin for all customers and the selected customer
+            counts_all, bins_all = np.histogram(filtered_data[selected_feature], bins=bins)
+            count_customer, _ = np.histogram(filtered_data[selected_feature].iloc[customer_index], bins=bins)
+        
+            # Find the bin index for the customer value
+            customer_bin_index = np.digitize(customer_value, bins=bins) - 1  # Adjust for zero-based indexing
+        
+        # Create bar chart
         fig, ax = plt.subplots()
-        ax.bar(bins_all[:-1] + bin_width/2, counts_all, width=bin_width, color='gray', alpha=0.7, label='All Clients')
-        ax.bar(bins_all[customer_bin_index] + bin_width/2, counts_all, width=bin_width, color='red', label='Current Customer')  # Use customer_bin_index
-        ax.set_xlabel(selected_feature)  # Adjust label based on feature
-        ax.set_ylabel('Count (Log Scale)')  # Update label
-        ax.set_title(f'Distribution of {selected_feature} (Binned)')
-        ax.set_yscale('log')  # Set log scale for y-axis
+        
+        if customer_data_copy[selected_feature].dtype == 'object':  # Categorical feature
+            # Set bar positions and labels
+            ax.bar(np.arange(len(categories)) + 0.5, counts, color='gray', alpha=0.7, label='All Clients')  # Adjust for bar positioning
+        
+            # Set x-axis labels (categorical features)
+            ax.set_xticks(np.arange(len(categories)) + 0.5)  # Adjust for bar center positioning
+            ax.set_xticklabels(categories, rotation=45, ha='right')  # Rotate and align labels
+        else:  # Numerical feature
+            ax.bar(bins_all[:-1] + bin_width/2, counts_all, width=bin_width, color='gray', alpha=0.7, label='All Clients')
+            ax.bar(bins_all[customer_bin_index] + bin_width/2, counts_all, width=bin_width, color='red', label='Current Customer')  # Use customer_bin_index
+            ax.set_xlabel(selected_feature)  # Adjust label based on feature
+        
+        # Customize plot
+        ax.set_ylabel('Count')  # Update label (remove log scale for categorical features)
+        ax.set_title(f'Distribution of {selected_feature}')
         ax.legend()
         plt.tight_layout()
-        st.pyplot(plt.gcf())
         
+        # Display chart in Streamlit
+        st.pyplot(plt.gcf())
         
         # =========================================================================
         # PREDICTION USING MODEL FOR SELECTED CUSTOMER
