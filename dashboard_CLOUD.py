@@ -308,23 +308,12 @@ def main():
         # Create bins (adjust number of bins as needed)
 
         bins = np.linspace(filtered_data[selected_feature].min(), filtered_data[selected_feature].max(), 10)  # 10 bins
-        st.write("BINS CREATION")
-        st.write(filtered_data[selected_feature].min())
-        st.write(filtered_data[selected_feature].max())    
-        st.write(bins)
-        
+        # Calculate bin width (assuming equally spaced bins)
+        bin_width = bins[1] - bins[0]
+
         # Count data points within each bin for all customers and the selected customer
         counts_all, bins_all = np.histogram(filtered_data[selected_feature], bins=bins)
         count_customer, _ = np.histogram(filtered_data[selected_feature].iloc[customer_index], bins=bins)
-
-        st.write("full_data_values")
-        st.write(full_data_values)
-        st.write("customer_value")
-        st.write(customer_value)
-        st.write("counts_all")
-        st.write(counts_all)
-        st.write("count_customer")
-        st.write(count_customer)
 
         
         # Find the bin index for the customer value
@@ -332,8 +321,8 @@ def main():
 
         # Create bar chart with bins and log scale on y-axis
         fig, ax = plt.subplots()
-        ax.bar(bins_all[:-1], counts_all, color='gray', alpha=0.7, label='All Clients')
-        ax.bar(bins_all[customer_bin_index], counts_all, color='red', label='Current Customer')  # Use customer_bin_index
+        ax.bar(bins_all[:-1] + bin_width/2, counts_all, width=bin_width, color='gray', alpha=0.7, label='All Clients')
+        ax.bar(bins_all[customer_bin_index] + bin_width/2, counts_all, width=bin_width, color='red', label='Current Customer')  # Use customer_bin_index
         ax.set_xlabel(selected_feature)  # Adjust label based on feature
         ax.set_ylabel('Count (Log Scale)')  # Update label
         ax.set_title(f'Distribution of {selected_feature} (Binned)')
