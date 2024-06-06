@@ -273,8 +273,13 @@ def main():
     customer_value = customer_data_copy[selected_feature].iloc[0]
     customer_count, _ = np.histogram(customer_value, bins=full_data_bins)  # Ensure bins are consistent
     
+    # Print some values for debugging (optional)
+    print(f"Minimum bin value: {full_data_bins[0]}")
+    print(f"Maximum bin value: {full_data_bins[-1]}")
+    print(f"Customer value for {selected_feature}: {customer_value}")
+    
     # Create bars with highlighting
-    bar_width = 0.35  # Adjust bar width as needed
+    bar_width = 0.3  # Adjust bar width as needed (try smaller values)
     index = np.arange(len(full_data_bins[:-1]))
     plt.bar(index - bar_width/2, full_data_counts, bar_width, color='gray', label='All Clients')
     plt.bar(index + bar_width/2, customer_count, bar_width, color='red', label='Current Customer')
@@ -285,7 +290,6 @@ def main():
     plt.legend()
     plt.tight_layout()
     st.pyplot(plt.gcf())
-        
 
     # =========================================================================
     # ADD Missing features Manually (due to preprocess) then re-order features
