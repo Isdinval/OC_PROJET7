@@ -318,9 +318,8 @@ def main():
         # Generate graph
         st.header('Comparative Analysis')
        
-        # Get all features (assuming numerical features)
-        all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
-        # Filter controls
+        # Select feature
+        all_features = customer_data_copy.columns
         selected_feature = st.selectbox('Select Feature:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))  # Set default
 
         # Filter data based on selected feature
