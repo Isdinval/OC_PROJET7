@@ -301,7 +301,7 @@ def main():
         filtered_data = customer_data_copy.copy() # Avoid modifying original data
          
         # Separate data for full dataset and current customer
-        full_data_values = customer_data_copy[selected_feature]
+        full_data_values = np.array(customer_data_copy[selected_feature])
         customer_value = customer_data_copy[selected_feature].iloc[customer_index]
         st.write("full_data_values")
         st.write(full_data_values)
