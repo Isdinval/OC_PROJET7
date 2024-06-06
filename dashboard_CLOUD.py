@@ -336,6 +336,23 @@ def main():
         # Filter controls
         selected_feature = st.selectbox('Select Feature:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))  # Set default
 
+
+
+        # Load feature descriptions (assuming customer_data_description is a Pandas DataFrame)
+        feature_descriptions = customer_data_description
+        
+        # Select feature
+        all_features = list(feature_descriptions["Row"])  # Assuming "Row" contains feature names
+        
+        # Find description for the selected feature
+        feature_description = feature_descriptions[feature_descriptions["Row"] == selected_feature]["Description"].iloc[0]
+        
+        # Print description
+        st.write(f"Description for '{selected_feature}':")
+        st.write(feature_description)
+
+
+
         # Filter data based on selected feature
         filtered_data = customer_data_copy.copy() # Avoid modifying original data
          
