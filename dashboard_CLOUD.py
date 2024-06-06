@@ -309,7 +309,7 @@ def main():
         # CUSTOMERS BASIC INFORMATIONS
         # =========================================================================
         # Display customer information
-        st.subheader("Customer Information:")
+        st.header("Customer Information:")
 
         age_years = -input_data_copy['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
         employment_duration_years = -input_data_copy.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
