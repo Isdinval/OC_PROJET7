@@ -256,6 +256,9 @@ def main():
     # =========================================================================
     # COMPARATIVE ANALYSIS USING GRAPHS 
     # =========================================================================
+    # Generate graph
+    st.header('Comparative Analysis')
+    
     # Get all features (assuming numerical features)
     all_features = customer_data_copy.select_dtypes(include=[np.number])  # Adjust for categorical features if needed
     
@@ -265,24 +268,21 @@ def main():
     # Filter data based on selected feature
     filtered_data = customer_data_copy.copy()  # Avoid modifying original data
     
-    if selected_feature != 'All Clients':
-      # Assuming a numerical feature is selected (adjust for categorical features)
-      filtered_data = filtered_data[filtered_data[selected_feature] <= customer_data_copy[selected_feature].iloc[0]]
-    
-    
-    # Generate graph
-    st.header('Comparative Analysis')
-    
-    # Bar chart with highlighting
+    # Separate data for full dataset and current customer
+    full_data_counts, full_data_bins = np.histogram(customer_data_copy[selected_feature])
     customer_value = customer_data_copy[selected_feature].iloc[0]
-    counts, bins = np.histogram(filtered_data[selected_feature])
+    customer_count, _ = np.histogram(customer_value, bins=full_data_bins)  # Ensure bins are consistent
     
-    bar_colors = ['red' if val == customer_value else 'blue' for val in bins[:-1]]
-    plt.bar(bins[:-1], counts, color=bar_colors)
+    # Create bars with highlighting
+    bar_width = 0.35  # Adjust bar width as needed
+    index = np.arange(len(full_data_bins[:-1]))
+    plt.bar(index - bar_width/2, full_data_counts, bar_width, color='gray', label='All Clients')
+    plt.bar(index + bar_width/2, customer_count, bar_width, color='red', label='Current Customer')
     plt.xlabel(selected_feature)
     plt.ylabel('Frequency')
     plt.title(f'{selected_feature} Distribution')
-    plt.xlim(min(bins), max(bins))
+    plt.xticks(index, full_data_bins[:-1])  # Align bars with bins
+    plt.legend()
     plt.tight_layout()
     st.pyplot(plt.gcf())
         
