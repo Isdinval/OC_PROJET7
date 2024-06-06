@@ -320,18 +320,18 @@ def main():
         st.pyplot(fig)
 
     
-        # Create line plot with highlighting
-        plt.plot(full_data_values, color='gray', label='All Clients', alpha=0.7) # Add transparency for better visibility
+        # # Create line plot with highlighting
+        # plt.plot(full_data_values, color='gray', label='All Clients', alpha=0.7) # Add transparency for better visibility
          
-        # Highlight current customer with red dot
-        plt.scatter(customer_index, customer_value, marker='o', color='red', s=100, label='Current Customer') # Adjust marker size (s)
+        # # Highlight current customer with red dot
+        # plt.scatter(customer_index, customer_value, marker='o', color='red', s=100, label='Current Customer') # Adjust marker size (s)
          
-        plt.xlabel('Customer Index')
-        plt.ylabel(selected_feature)
-        plt.title(f'{selected_feature} Distribution')
-        plt.legend()
-        plt.tight_layout()
-        st.pyplot(plt.gcf())
+        # plt.xlabel('Customer Index')
+        # plt.ylabel(selected_feature)
+        # plt.title(f'{selected_feature} Distribution')
+        # plt.legend()
+        # plt.tight_layout()
+        # st.pyplot(plt.gcf())
 
 
     
