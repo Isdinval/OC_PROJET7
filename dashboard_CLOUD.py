@@ -409,32 +409,30 @@ def main():
 
 
 
-        # Define gauge parameters (feel free to customize)
-        gauge_min = 0.0  # Minimum value for the score
-        gauge_max = 1.0  # Maximum value for the score
-        gauge_size = 200  # Size of the gauge in pixels
-
-        # Define gauge value and color based on score
-        gauge_value = probability_class1
-        if prediction_label == "Accepted":
+        # Define gauge parameters
+        gauge_title = "Credit Score"
+        
+        # Create gauge data (single data point)
+        gauge_data = dict(score=probability_class1 * 100, threshold=optimal_threshold * 100)
+        
+        # Define gauge color based on score
+        if probability_class1 >= optimal_threshold:
             gauge_color = "green"  # Green for accepted loans
         else:
             gauge_color = "red"  # Red for declined loans
         
-        # Calculate position for text elements (adjust as needed)
-        text_offset_y = gauge_size * 0.2  # Vertical offset for text
-        text_size = gauge_size * 0.15  # Font size for text
-        
-        # Create colored gauge HTML with text elements
-        gauge_html = f"""
-        <div style="text-align: center; margin: 10px auto;">
-          <div style="width: {gauge_size}px; height: {gauge_size}px; border-radius: 50%; border: 5px solid #ddd;">
-            <div style="width: {gauge_size * gauge_value}px; height: {gauge_size}px; background-color: {gauge_color}; border-radius: 50%; transition: all 1s ease-in-out;"></div>
-          </div>
-          <p style="font-weight: bold; position: relative; top: {text_offset_y}px; font-size: {text_size}px;">{probability_class1 * 100:.2f}%</p>
-          <p style="position: relative; top: -{text_offset_y}px; font-size: {text_size}px;">Threshold: {optimal_threshold * 100:.2f}%</p>
-        </div>
-        """
+        # Create gauge chart
+        fig = px.indicator(
+            gauge_data,
+            value="score",
+            domain={"min": 0, "max": 100},  # Set gauge range 0-100%
+            title=gauge_title,
+            mode="gauge+number+delta",  # Display score, threshold, and delta
+            delta={'reference': optimal_threshold * 100, 'increasing':'', 'decreasing':''},  # Customize delta display (optional)
+            gauge_shape="circular",  # Circular gauge
+            color="dark",  # Dark background for gauge
+            bar_color=gauge_color  # Set bar color based on score
+        )
 
 
 
