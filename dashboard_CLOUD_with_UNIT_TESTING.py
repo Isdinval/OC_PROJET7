@@ -18,6 +18,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder, FunctionTransfo
 
 import requests
 from io import StringIO
+import plotly.express as px
 
 
 # =========================================================================
