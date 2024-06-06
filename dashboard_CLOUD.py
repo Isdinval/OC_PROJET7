@@ -306,24 +306,18 @@ def main():
         # Separate data for full dataset (sorted) and current customer
         full_data_values = sorted_data[selected_feature]
         customer_value = customer_data_copy[selected_feature].iloc[customer_index]
-        
-        # Find the new index of the current customer in the sorted data
-        customer_index = sorted_data[sorted_data[selected_feature] == customer_value].index.tolist()[0]
-        
-        st.write("full_data_values")
-        st.write(full_data_values)
-        st.write("customer_value")
-        st.write(customer_value)
-        
+
+        st.write("1")
         # Create bar chart with highlighting
         plt.figure(figsize=(10, 6))  # Adjust figure size for better visualization
-        
+        st.write("2")
         # Plot full dataset data with a grey color (using sorted values)
         plt.bar(range(len(full_data_values)), full_data_values, color='gray', alpha=0.7, label='All Clients')
         
         # Highlight current customer with a red bar (using new index)
         plt.bar(customer_index, customer_value, color='red', label='Current Customer')
-        
+
+        st.write("2")
         plt.xlabel('Customer Index')
         plt.ylabel(selected_feature)
         plt.title(f'{selected_feature} Distribution (Sorted)')
@@ -331,6 +325,7 @@ def main():
         plt.legend()
         plt.tight_layout()
         st.pyplot(plt.gcf())
+        st.write("4")
 
         # # =========================================================================
         # # COMPARATIVE ANALYSIS USING GRAPHS
