@@ -468,6 +468,7 @@ def main():
         # PREDICTION USING MODEL FOR SELECTED CUSTOMER
         # =========================================================================
         st.header("IV. Model Prediction - Probability of Default ")
+        st.subheader("IV.1. Probability of Loan Default")
         input_df = pd.DataFrame([input_data])
         probability_class1 = model.predict_proba(input_df)[:, 1]         # Get the raw prediction score
 
@@ -508,6 +509,7 @@ def main():
             # SHAP VALUES FOR SELECTED CUSTOMER
             # =========================================================================
             # SHAP VALUES
+            st.subheader("IV.2. Importance Feature Analysis (SHAP)")
             final_estimator = get_final_estimator(model)
             explainer = shap.TreeExplainer(final_estimator)
             shap_values = explainer.shap_values(input_df)
@@ -519,6 +521,7 @@ def main():
             # TOP 10 POSITIVE OR NEGATIVE FEATURES
             # TABLE and MODIFICATION OF VALUES
             # =========================================================================
+            st.subheader("IV.3. Modify Features Value & Re-Predict")
             # Create two columns for the plots
             col1, col2 = st.columns(2)
     
