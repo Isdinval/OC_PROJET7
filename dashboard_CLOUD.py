@@ -411,36 +411,7 @@ def main():
 
 
 
-        # Define gauge parameters
-        gauge_title = "Credit Score"
-        
-        # Create gauge data (single data point)
-        gauge_data = dict(score=probability_class1 * 100, threshold=optimal_threshold * 100)
-        
-        # Define gauge color based on score
-        if probability_class1 >= optimal_threshold:
-            gauge_color = "green"  # Green for accepted loans
-        else:
-            gauge_color = "red"  # Red for declined loans
-        
-        # Create gauge chart using plotly.Figure and plotly.graph_objects.Indicator
-        fig = plotly.Figure(
-            go.Indicator(
-                value=gauge_data["score"],
-                domain={"min": 0, "max": 100},  # Set gauge range 0-100%
-                title=gauge_title,
-                mode="number+delta",  # Display score and delta (optional)
-                delta={'reference': gauge_data["threshold"], 'increasing':'', 'decreasing':''},  # Customize delta display (optional)
-                gauge_shape="circular",  # Circular gauge
-                axis_range=[0, 100],  # Set axis range for gauge
-                color="dark",  # Dark background for gauge
-                bar_color=gauge_color  # Set bar color based on score
-            )
-        )
-        
-        # Display the gauge chart using Streamlit
-        st.plotly_chart(fig)
-
+        streamviz.gauge(probability_class1, gSize="LRG", gTitle="Plotly Stream Gauge", sFix=True)
 
 
 
