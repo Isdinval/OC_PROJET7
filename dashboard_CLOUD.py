@@ -400,8 +400,9 @@ def main():
         # BIVARIATE GRAPHS
         # ========================================================================
         # Feature selection (assuming UI elements are already defined)
-        feature1 = st.selectbox('Select Feature 1:', all_features, index=all_features.get_loc('AMT_INCOME_TOTAL'))
-        feature2 = st.selectbox('Select Feature 2:', all_features, index=all_features.get_loc('AMT_ANNUITY'))
+        feature1 = st.selectbox('Select Feature 1:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))
+        feature2 = st.selectbox('Select Feature 2:', all_features.columns, index=all_features.columns.get_loc('AMT_ANNUITY'))
+
         
         # Data preparation for bivariate plot
         def prepare_bivariate_data(customer_data, feature1, feature2):
@@ -428,7 +429,7 @@ def main():
             # Customize and display the plot
             st.pyplot(plt.gcf())
         
-        # ... (rest of the code)
+
         
         # Generate bivariate plot when a button is clicked
         # if st.button("Generate Bivariate Plot"):
