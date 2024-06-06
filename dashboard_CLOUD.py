@@ -250,9 +250,8 @@ def main():
     # =========================================================================
     # EXPLAINABILITY SECTIONS
     # =========================================================================
-    explainability_sections = """
-    MODEL EXPLANATION:
-    --    
+    st.header("I. Model Explanation")
+    explainability_sections = """ 
     This loan approval prediction model is an XGBoost classifier. XGBoost stands for eXtreme Gradient Boosting, a powerful machine learning algorithm that combines the strengths of multiple decision trees to make more accurate predictions. It's known for its efficiency, scalability, and ability to handle complex relationships between features.
     The model analyzes various customer attributes, such as income, credit history, and debt-to-income ratio, to estimate the probability of loan default. The model's output is a probability score between 0% and 100%, where a lower score indicates a lower risk of the borrower defaulting on the loan.
     """
@@ -311,7 +310,7 @@ def main():
         # CUSTOMERS BASIC INFORMATIONS
         # =========================================================================
         # Display customer information
-        st.header("Customer Information:")
+        st.header("II. Customer Information:")
 
         age_years = -input_data_copy['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
         employment_duration_years = -input_data_copy.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
@@ -340,8 +339,8 @@ def main():
         # =========================================================================
         # COMPARATIVE ANALYSIS USING GRAPHS
         # ========================================================================
-        st.header('Comparative Analysis')
-        st.subheader('Univariate Analysis')
+        st.header('III. Comparative Analysis')
+        st.subheader('III.1. Univariate Analysis')
         # Get all features (assuming numerical features)
         all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
         # Filter controls
@@ -402,7 +401,7 @@ def main():
         # =========================================================================
         # BIVARIATE GRAPHS
         # ========================================================================
-        st.subheader('Bivariate Analysis')
+        st.subheader('III.2. Bivariate Analysis')
 
         # Feature selection (assuming UI elements are already defined)
         all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
@@ -468,7 +467,7 @@ def main():
         # =========================================================================
         # PREDICTION USING MODEL FOR SELECTED CUSTOMER
         # =========================================================================
-        st.header("Model Prediction - Probability of Default ")
+        st.header("IV. Model Prediction - Probability of Default ")
         input_df = pd.DataFrame([input_data])
         probability_class1 = model.predict_proba(input_df)[:, 1]         # Get the raw prediction score
 
