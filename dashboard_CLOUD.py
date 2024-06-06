@@ -285,8 +285,6 @@ def main():
         input_data_copy = customer_data_copy[customer_data_copy['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
         
 
-        st.dataframe(input_data_copy)
-
         # =========================================================================
         # CUSTOMERS BASIC INFORMATIONS
         # =========================================================================
@@ -302,9 +300,14 @@ def main():
         housing_type = input_data_copy['NAME_HOUSING_TYPE'].lower()
 
         customer_description = f"""
-        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data_copy['NAME_EDUCATION_TYPE']}** who works in the **{input_data_copy['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into **{gender_pronoun.lower()}** employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data_copy['NAME_CONTRACT_TYPE'].lower()}** loan.
+        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data_copy['NAME_EDUCATION_TYPE']}** who works in the **{input_data_copy['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data_copy['NAME_CONTRACT_TYPE'].lower()}** loan. **{gender_pronoun.capitalize()}** income is **{input_data_copy['AMT_INCOME_TOTAL']** €. 
         """
         st.write(customer_description)
+        
+        loan_description = f"""
+        The loan asked if for **{input_data_copy['AMT_CREDIT']}** €, and the annuity asked are **{input_data_copy['AMT_ANNUITY']}** €. 
+        """
+        st.write(loan_description)
 
         
         # =========================================================================
