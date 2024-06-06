@@ -346,7 +346,7 @@ def main():
         # Data preparation for bivariate plot
         def prepare_bivariate_data(customer_data, feature1, feature2):
             # Extract data for the current customer
-            customer_data = customer_data[customer_data['SK_ID_CURR'] == sk_id_curr]
+            # customer_data = customer_data[customer_data['SK_ID_CURR'] == sk_id_curr]
             # Select and prepare features
             feature1_values = customer_data[feature1]
             feature2_values = customer_data[feature2]
@@ -371,7 +371,7 @@ def main():
         # Generate bivariate plot when a button is clicked
         # if st.button("Generate Bivariate Plot"):
 
-        feature1_values, feature2_values = prepare_bivariate_data(customer_data, feature1, feature2)
+        feature1_values, feature2_values = prepare_bivariate_data(customer_data_copy, feature1, feature2)
         generate_bivariate_plot(feature1_values, feature2_values)
 
         
