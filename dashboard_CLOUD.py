@@ -180,7 +180,7 @@ def load_test_data_description():
     url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/HomeCredit_columns_description.csv'
     response = requests.get(url)
     if response.status_code == 200:
-        return pd.read_csv(StringIO(response.text), delimiter=",")
+        return pd.read_csv(StringIO(response.text))
     else:
         st.error("Failed to load data from GitHub.")
         return None
