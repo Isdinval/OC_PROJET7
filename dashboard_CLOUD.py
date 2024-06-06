@@ -302,7 +302,7 @@ def main():
         housing_type = input_data_copy['NAME_HOUSING_TYPE'].lower()
 
         customer_description = f"""
-        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data['NAME_EDUCATION_TYPE']}** who works in the **{input_data['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into **{gender_pronoun.lower()}** employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data['NAME_CONTRACT_TYPE'].lower()}** loan.
+        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data_copy['NAME_EDUCATION_TYPE']}** who works in the **{input_data_copy['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into **{gender_pronoun.lower()}** employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data_copy['NAME_CONTRACT_TYPE'].lower()}** loan.
         """
         st.write(customer_description)
 
