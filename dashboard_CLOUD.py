@@ -269,22 +269,57 @@ def main():
     # Reorder features using "feature_names_from_Model"
     ordered_features = [col for col in feature_names_from_Model if col in customer_data_preprocessed.columns]
     customer_data_preprocessed = customer_data_preprocessed[ordered_features]
-    
+
+
+            # Display customer information
+        st.subheader("Customer Information:")
+
+        age_years = -input_data['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
+        employment_duration_years = -input_data.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
+
+        gender_pronoun = "He" if input_data['CODE_GENDER'] == 'M' else "She"
+        education_level = input_data['NAME_EDUCATION_TYPE'].lower()
+        family_status = input_data['NAME_FAMILY_STATUS'].lower()
+        housing_type = input_data['NAME_HOUSING_TYPE'].lower()
+
+        customer_description = f"""
+        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data['NAME_EDUCATION_TYPE']}** who works in the **{input_data['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into **{gender_pronoun.lower()}** employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data['NAME_CONTRACT_TYPE'].lower()}** loan.
+        """
+        st.write(customer_description)
 
     # Check if SK_ID_CURR exists in the data
     if sk_id_curr in customer_data_preprocessed['SK_ID_CURR'].values:
         # =========================================================================
-        # CUSTOMERS INFORMATIONS
+        # CUSTOMERS DATA
         # =========================================================================
         # Get the index of the selected customer
         customer_index = customer_data_preprocessed[customer_data_preprocessed['SK_ID_CURR'] == sk_id_curr].index[0]
 
         # Get the data for the selected customer
         input_data = customer_data_preprocessed[customer_data_preprocessed['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
+        st.write(input_data)
+        st.write(input_data.columns)
 
+        # =========================================================================
+        # CUSTOMERS BASIC INFORMATIONS
+        # =========================================================================
+        # Display customer information
+        st.subheader("Customer Information:")
 
+        age_years = -input_data['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
+        employment_duration_years = -input_data.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
 
+        gender_pronoun = "He" if input_data['CODE_GENDER'] == 'M' else "She"
+        education_level = input_data['NAME_EDUCATION_TYPE'].lower()
+        family_status = input_data['NAME_FAMILY_STATUS'].lower()
+        housing_type = input_data['NAME_HOUSING_TYPE'].lower()
 
+        customer_description = f"""
+        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data['NAME_EDUCATION_TYPE']}** who works in the **{input_data['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into **{gender_pronoun.lower()}** employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data['NAME_CONTRACT_TYPE'].lower()}** loan.
+        """
+        st.write(customer_description)
+
+        
         # =========================================================================
         # PREDICTION USING MODEL FOR SELECTED CUSTOMER
         # =========================================================================
