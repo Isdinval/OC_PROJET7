@@ -426,15 +426,14 @@ def main():
             plt.title(f"Bivariate Analysis: {feature1} vs. {feature2}")
         
             # Customize and display the plot
+            plt.clf()  # Clear the current figure before displaying the new one
             st.pyplot(plt.gcf())
         
 
         
         # Generate bivariate plot when a button is clicked
         # if st.button("Generate Bivariate Plot"):
-        # Clear the current figure before displaying the new one
-        plt.clf()
-        st.pyplot(plt.gcf())
+
         feature1_values, feature2_values = prepare_bivariate_data(customer_data, feature1, feature2)
         generate_bivariate_plot(feature1_values, feature2_values)
 
