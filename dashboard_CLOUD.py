@@ -341,7 +341,7 @@ def main():
         # COMPARATIVE ANALYSIS USING GRAPHS
         # ========================================================================
         st.header('Comparative Analysis')
-
+        st.subheader('Univariate Analysis')
         # Get all features (assuming numerical features)
         all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
         # Filter controls
@@ -402,7 +402,8 @@ def main():
         # =========================================================================
         # BIVARIATE GRAPHS
         # ========================================================================
-        
+        st.subheader('Bivariate Analysis')
+
         # Feature selection (assuming UI elements are already defined)
         all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
         feature1 = st.selectbox('Select Feature 1:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))
@@ -439,7 +440,7 @@ def main():
 
 
             # Create the plot
-            sns.scatterplot(x=feature1_values, y=feature2_values)
+            sns.scatterplot(x=feature1_values, y=feature2_values, color='grey')
             plt.xlabel(feature1)
             plt.ylabel(feature2)
             plt.title(f"Bivariate Analysis: {feature1} vs. {feature2}")
