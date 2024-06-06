@@ -274,9 +274,9 @@ def main():
     customer_count, _ = np.histogram(customer_value, bins=full_data_bins)  # Ensure bins are consistent
     
     # Print some values for debugging (optional)
-    print(f"Minimum bin value: {full_data_bins[0]}")
-    print(f"Maximum bin value: {full_data_bins[-1]}")
-    print(f"Customer value for {selected_feature}: {customer_value}")
+    st.write(f"Minimum bin value: {full_data_bins[0]}")
+    st.write(f"Maximum bin value: {full_data_bins[-1]}")
+    st.write(f"Customer value for {selected_feature}: {customer_value}")
     
     # Create bars with highlighting
     bar_width = 0.3  # Adjust bar width as needed (try smaller values)
