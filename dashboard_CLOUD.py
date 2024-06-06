@@ -284,11 +284,8 @@ def main():
         input_data      = customer_data_preprocessed[customer_data_preprocessed['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
         input_data_copy = customer_data_copy[customer_data_copy['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
         
-        st.write(input_data)
-        st.write(input_data.columns)
 
-        st.write(input_data_copy)
-        st.write(input_data_copy.columns)
+        st.dataframe(input_data_copy)
 
         # =========================================================================
         # CUSTOMERS BASIC INFORMATIONS
