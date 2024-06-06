@@ -310,16 +310,25 @@ def main():
         st.write(customer_value)
 
 
-        # Create a bar chart
+        # Create bins (adjust number of bins as needed)
+        bins = np.linspace(filtered_data[selected_feature].min(), filtered_data[selected_feature].max(), 20)  # 20 bins
+        
+        # Count data points within each bin for all customers and the selected customer
+        counts_all, bins_all = np.histogram(filtered_data[selected_feature], bins=bins)
+        count_customer, _ = np.histogram(filtered_data[selected_feature].iloc[customer_index], bins=bins)
+        
+        # Create bar chart with bins
         fig, ax = plt.subplots()
-        ax.bar(range(len(full_data_values)), full_data_values, color='gray', alpha=0.7, label='All Clients')
-        ax.bar(len(full_data_values) - 1, customer_value, color='red', label='Current Customer')  # Last index for customer value
-        ax.set_xlabel('Customer Index')
-        ax.set_ylabel('Value')
-        ax.set_title('Distribution of a Feature')
+        ax.bar(bins_all[:-1], counts_all, color='gray', alpha=0.7, label='All Clients')  # Use bins[:-1] for correct bar placement
+        ax.bar(bins_all[-1], count_customer, color='red', label='Current Customer')  # Last bin for customer value
+        ax.set_xlabel(selected_feature)  # Adjust label based on feature
+        ax.set_ylabel('Count')
+        ax.set_title(f'Distribution of {selected_feature} (Binned)')
         ax.legend()
-        plt.legend(loc='upper left')  # Adjust location as needed
+        plt.tight_layout()
         st.pyplot(plt.gcf())
+
+
 
             
         # # Create line plot with highlighting
