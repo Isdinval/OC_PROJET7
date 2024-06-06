@@ -409,9 +409,9 @@ def main():
         feature2 = st.selectbox('Select Feature 2:', all_features.columns, index=all_features.columns.get_loc('AMT_ANNUITY'))
 
         feature1_description = feature_descriptions[feature_descriptions["Row"] == feature1]["Description"].iloc[0]         # Find description for the selected feature
-        st.write(f"Description de la feature : **{feature1_description}**")
+        st.write(f"Description de la feature 1 : **{feature1_description}**")
         feature2_description = feature_descriptions[feature_descriptions["Row"] == feature2]["Description"].iloc[0]         # Find description for the selected feature
-        st.write(f"Description de la feature : **{feature2_description}**")
+        st.write(f"Description de la feature 2 : **{feature2_description}**")
 
 
 
