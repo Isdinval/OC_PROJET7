@@ -270,27 +270,20 @@ def main():
     filtered_data = customer_data_copy.copy()  # Avoid modifying original data
     
     # Separate data for full dataset and current customer
-    full_data_counts, full_data_bins = np.histogram(customer_data_copy[selected_feature])
+    full_data_values = customer_data_copy[selected_feature]
     customer_value = customer_data_copy[selected_feature].iloc[0]
-    customer_count, _ = np.histogram(customer_value, bins=full_data_bins)  # Ensure bins are consistent
+    st.write("customer_value")
+    st.write(customer_value)
     
-    # Print some values for debugging (optional)
-    st.write(f"Minimum bin value: {full_data_bins[0]}")
-    st.write(f"Maximum bin value: {full_data_bins[-1]}")
-    st.write(f"Customer value for {selected_feature}: {customer_value}")
+    # Create line plot with highlighting
+    plt.plot(full_data_values, color='gray', label='All Clients', alpha=0.7)  # Add transparency for better visibility
     
-    # Create bars with highlighting
-    bar_width = 0.3  # Adjust bar width as needed (try smaller values)
-    index = np.arange(len(full_data_bins[:-1]))
-    
-    # **Key Change: Plot red bar first to ensure it's on top**
-    plt.bar(index + bar_width/2, customer_count, bar_width, color='red', label='Current Customer', zorder=2)
-    plt.bar(index - bar_width/2, full_data_counts, bar_width, color='gray', label='All Clients', zorder=1)
+    # Highlight current customer with red dot
+    plt.scatter(customer_value, customer_value, marker='o', color='red', s=100, label='Current Customer')  # Adjust marker size (s)
     
     plt.xlabel(selected_feature)
-    plt.ylabel('Frequency')
+    plt.ylabel('Value')
     plt.title(f'{selected_feature} Distribution')
-    plt.xticks(index, full_data_bins[:-1])  # Align bars with bins
     plt.legend()
     plt.tight_layout()
     st.pyplot(plt.gcf())
