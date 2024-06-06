@@ -172,7 +172,19 @@ def load_test_data():
     else:
         st.error("Failed to load data from GitHub.")
         return None
-    return feature_names
+
+
+# Load the test data
+@st.cache_data()   # Cache the test data to avoid reloading
+def load_test_data_description():
+    url = 'https://raw.githubusercontent.com/Isdinval/OC_PROJET7/main/HomeCredit_columns_description.csv'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return pd.read_csv(StringIO(response.text), delimiter=",")
+    else:
+        st.error("Failed to load data from GitHub.")
+        return None
+
 
 
 
@@ -185,6 +197,8 @@ feature_names = feature_names_from_Model
 
 # Load Test DATA
 customer_data = load_test_data()
+customer_data_description = load_test_data_description()
+st.write(customer_data_description)
 
 # Optimal threshold from MLflow
 optimal_threshold = 0.636364
