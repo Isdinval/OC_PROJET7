@@ -432,6 +432,9 @@ def main():
         
         # Generate bivariate plot when a button is clicked
         # if st.button("Generate Bivariate Plot"):
+        # Clear the current figure before displaying the new one
+        plt.clf()
+        st.pyplot(plt.gcf())
         feature1_values, feature2_values = prepare_bivariate_data(customer_data, feature1, feature2)
         generate_bivariate_plot(feature1_values, feature2_values)
 
