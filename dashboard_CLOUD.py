@@ -260,7 +260,7 @@ def main():
     all_features = customer_data_copy.select_dtypes(include=[np.number])  # Adjust for categorical features if needed
     
     # Filter controls
-    selected_feature = st.sidebar.selectbox('Select Feature:', all_features.columns)
+    selected_feature = st.selectbox('Select Feature:', all_features.columns)
     
     # Filter data based on selected feature
     filtered_data = customer_data_copy.copy()  # Avoid modifying original data
