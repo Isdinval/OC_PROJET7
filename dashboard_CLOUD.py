@@ -306,7 +306,7 @@ def main():
         st.write(customer_description)
         
         loan_description = f"""
-        The loan asked if for **{input_data_copy['AMT_CREDIT']}** €, and the annuity asked are **{input_data_copy['AMT_ANNUITY']}** €. 
+        The loan asked is **{input_data_copy['AMT_CREDIT']}** €, and the annuity asked are **{input_data_copy['AMT_ANNUITY']}** €. 
         """
         st.write(loan_description)
 
