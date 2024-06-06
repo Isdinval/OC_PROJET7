@@ -269,7 +269,8 @@ def main():
     # Remove DAYS EMPLOTYED ANOMALIES
     # Exclude the specific value from mean calculation (assuming it's unique)
     filtered_data = customer_data_copy[customer_data_copy['DAYS_EMPLOYED'] != 365243]
-    mean_days_employed = filtered_data['DAYS_EMPLOYED'].mean()
+    mean_days_employed = int(filtered_data['DAYS_EMPLOYED'].mean())
+    st.write(mean_days_employed)
     customer_data_copy['DAYS_EMPLOYED']  = customer_data_copy['DAYS_EMPLOYED'].replace(365243, mean_days_employed, inplace=True)
 
 
