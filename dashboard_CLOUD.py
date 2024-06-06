@@ -412,7 +412,7 @@ def main():
 
 
         streamviz.gauge(
-            probability_class1, gSize="LRG", gTitle=f"Probability of Default (Treshold: "{optimal_threshold * 100:.2f}%), sFix="%",
+            probability_class1, gSize="LRG", gTitle=f"Probability of Default (Treshold: {optimal_threshold * 100:.2f}%)", sFix="%",
             grLow=0, grMid=optimal_threshold * 100, gcLow="#1B8720", 
             gcMid="#FF9400", gcHigh="#FF1708")
 
