@@ -305,7 +305,7 @@ def main():
         customer_value = customer_data_copy[selected_feature].iloc[0]
         
         # Create bar chart with highlighting
-        plt.figure(figsize=(20, 12))  # Adjust figure size for better visualization
+        plt.figure(figsize=(10, 10))  # Adjust figure size for better visualization
         
         # Plot full dataset data with a grey color
         plt.bar(range(len(full_data_values)), full_data_values, color='gray', alpha=0.7, label='All Clients')
