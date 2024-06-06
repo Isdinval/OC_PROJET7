@@ -317,7 +317,7 @@ def main():
         ax.set_ylabel('Value')
         ax.set_title('Distribution of a Feature')
         ax.legend()
-        plt.tight_layout()
+        plt.legend(loc='upper left')  # Adjust location as needed
         st.pyplot(plt.gcf())
 
             
