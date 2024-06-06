@@ -287,9 +287,9 @@ def main():
         
         # =========================================================================
         # COMPARATIVE ANALYSIS USING GRAPHS
-        # =========================================================================
-        # Generate graph
-        st.header('Comparative Analysis')
+        # ========================================================================
+        # Generate graph
+        st.header('Comparative Analysis')
          
         # Get all features (assuming numerical features)
         all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
