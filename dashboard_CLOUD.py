@@ -249,6 +249,7 @@ def main():
     sk_id_curr = st.number_input('Enter SK_ID_CURR (ex: 100001 or 101268):', min_value=customer_data['SK_ID_CURR'].min(), max_value=customer_data['SK_ID_CURR'].max())
 
     # Preprocess Data
+    customer_data_copy = customer_data
     customer_data_preprocessed = preprocess_dataframe(customer_data)
 
     
@@ -271,34 +272,23 @@ def main():
     customer_data_preprocessed = customer_data_preprocessed[ordered_features]
 
 
-            # Display customer information
-        st.subheader("Customer Information:")
-
-        age_years = -input_data['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
-        employment_duration_years = -input_data.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
-
-        gender_pronoun = "He" if input_data['CODE_GENDER'] == 'M' else "She"
-        education_level = input_data['NAME_EDUCATION_TYPE'].lower()
-        family_status = input_data['NAME_FAMILY_STATUS'].lower()
-        housing_type = input_data['NAME_HOUSING_TYPE'].lower()
-
-        customer_description = f"""
-        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data['NAME_EDUCATION_TYPE']}** who works in the **{input_data['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into **{gender_pronoun.lower()}** employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data['NAME_CONTRACT_TYPE'].lower()}** loan.
-        """
-        st.write(customer_description)
-
     # Check if SK_ID_CURR exists in the data
     if sk_id_curr in customer_data_preprocessed['SK_ID_CURR'].values:
         # =========================================================================
         # CUSTOMERS DATA
         # =========================================================================
         # Get the index of the selected customer
-        customer_index = customer_data_preprocessed[customer_data_preprocessed['SK_ID_CURR'] == sk_id_curr].index[0]
+        customer_index      = customer_data_preprocessed[customer_data_preprocessed['SK_ID_CURR'] == sk_id_curr].index[0]
 
         # Get the data for the selected customer
-        input_data = customer_data_preprocessed[customer_data_preprocessed['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
+        input_data      = customer_data_preprocessed[customer_data_preprocessed['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
+        input_data_copy = customer_data_copy[customer_data_copy['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
+        
         st.write(input_data)
         st.write(input_data.columns)
+
+        st.write(input_data_copy)
+        st.write(input_data_copy.columns)
 
         # =========================================================================
         # CUSTOMERS BASIC INFORMATIONS
@@ -306,18 +296,18 @@ def main():
         # Display customer information
         st.subheader("Customer Information:")
 
-        age_years = -input_data['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
-        employment_duration_years = -input_data.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
+        age_years = -input_data_copy['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
+        employment_duration_years = -input_data_copy.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
 
-        gender_pronoun = "He" if input_data['CODE_GENDER'] == 'M' else "She"
-        education_level = input_data['NAME_EDUCATION_TYPE'].lower()
-        family_status = input_data['NAME_FAMILY_STATUS'].lower()
-        housing_type = input_data['NAME_HOUSING_TYPE'].lower()
+        gender_pronoun = "He" if input_data_copy['CODE_GENDER'] == 'M' else "She"
+        education_level = input_data_copy['NAME_EDUCATION_TYPE'].lower()
+        family_status = input_data_copy['NAME_FAMILY_STATUS'].lower()
+        housing_type = input_data_copy['NAME_HOUSING_TYPE'].lower()
 
-        # customer_description = f"""
-        # **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data['NAME_EDUCATION_TYPE']}** who works in the **{input_data['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into **{gender_pronoun.lower()}** employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data['NAME_CONTRACT_TYPE'].lower()}** loan.
-        # """
-        # st.write(customer_description)
+        customer_description = f"""
+        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data['NAME_EDUCATION_TYPE']}** who works in the **{input_data['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into **{gender_pronoun.lower()}** employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data['NAME_CONTRACT_TYPE'].lower()}** loan.
+        """
+        st.write(customer_description)
 
         
         # =========================================================================
