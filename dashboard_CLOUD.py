@@ -304,10 +304,6 @@ def main():
         # Separate data for full dataset and current customer
         full_data_values = np.array(customer_data_copy[selected_feature])
         customer_value = customer_data_copy[selected_feature].iloc[customer_index]
-        st.write("full_data_values")
-        st.write(full_data_values)
-        st.write("customer_value")
-        st.write(customer_value)
 
 
         # Create bins (adjust number of bins as needed)
@@ -316,6 +312,12 @@ def main():
         # Count data points within each bin for all customers and the selected customer
         counts_all, bins_all = np.histogram(filtered_data[selected_feature], bins=bins)
         count_customer, _ = np.histogram(filtered_data[selected_feature].iloc[customer_index], bins=bins)
+        
+        st.write("counts_all")
+        st.write(counts_all)
+        st.write("count_customer")
+        st.write(count_customer)
+
         
         # Create bar chart with bins
         fig, ax = plt.subplots()
