@@ -411,7 +411,7 @@ def main():
 
 
 
-        streamviz.gauge(probability_class1, gSize="LRG", gTitle="Plotly Stream Gauge", sFix=%)
+        streamviz.gauge(probability_class1, gSize="LRG", gTitle="Plotly Stream Gauge", sFix="%")
 
 
 
