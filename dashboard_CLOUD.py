@@ -321,18 +321,18 @@ def main():
         
         # Find the bin index for the customer value
         customer_bin_index = np.digitize(customer_value, bins=bins) - 1  # Adjust for zero-based indexing
-        
-        # Create bar chart with bins
+
+        # Create bar chart with bins and log scale on y-axis
         fig, ax = plt.subplots()
         ax.barh(bins_all[:-1], counts_all, color='gray', alpha=0.7, label='All Clients')
         ax.barh(bins_all[customer_bin_index], counts_all, color='red', label='Current Customer')  # Use customer_bin_index
         ax.set_xlabel(selected_feature)  # Adjust label based on feature
-        ax.set_ylabel('Count')
+        ax.set_ylabel('Count (Log Scale)')  # Update label
         ax.set_title(f'Distribution of {selected_feature} (Binned)')
+        ax.set_yscale('log')  # Set log scale for y-axis
         ax.legend()
         plt.tight_layout()
         st.pyplot(plt.gcf())
-
 
             
         # # Create line plot with highlighting
