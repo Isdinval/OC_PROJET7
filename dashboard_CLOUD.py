@@ -272,6 +272,8 @@ def main():
     # Separate data for full dataset and current customer
     full_data_values = customer_data_copy[selected_feature]
     customer_value = customer_data_copy[selected_feature].iloc[0]
+    st.write("full_data_values")
+    st.write(full_data_values)
     st.write("customer_value")
     st.write(customer_value)
     
