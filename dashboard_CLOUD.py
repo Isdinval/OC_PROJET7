@@ -306,9 +306,12 @@ def main():
 
 
         # Create bins (adjust number of bins as needed)
+
+        bins = np.linspace(filtered_data[selected_feature].min(), filtered_data[selected_feature].max(), 10)  # 10 bins
+        st.write("BINS CREATION")
         st.write(filtered_data[selected_feature].min())
         st.write(filtered_data[selected_feature].max())    
-        bins = np.linspace(filtered_data[selected_feature].min(), filtered_data[selected_feature].max(), 10)  # 10 bins
+        st.write(bins)
         
         # Count data points within each bin for all customers and the selected customer
         counts_all, bins_all = np.histogram(filtered_data[selected_feature], bins=bins)
