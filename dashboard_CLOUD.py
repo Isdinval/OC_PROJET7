@@ -319,17 +319,19 @@ def main():
         st.write(count_customer)
 
         
+        # Find the bin index for the customer value
+        customer_bin_index = np.digitize(customer_value, bins=bins) - 1  # Adjust for zero-based indexing
+        
         # Create bar chart with bins
         fig, ax = plt.subplots()
-        ax.bar(bins_all[:-1], counts_all, color='gray', alpha=0.7, label='All Clients')  # Use bins[:-1] for correct bar placement
-        ax.bar(bins_all[-1], count_customer, color='red', label='Current Customer')  # Last bin for customer value
+        ax.bar(bins_all[:-1], counts_all, color='gray', alpha=0.7, label='All Clients')
+        ax.bar(bins_all[customer_bin_index], count_customer, color='red', label='Current Customer')  # Use customer_bin_index
         ax.set_xlabel(selected_feature)  # Adjust label based on feature
         ax.set_ylabel('Count')
         ax.set_title(f'Distribution of {selected_feature} (Binned)')
         ax.legend()
         plt.tight_layout()
         st.pyplot(plt.gcf())
-
 
 
             
