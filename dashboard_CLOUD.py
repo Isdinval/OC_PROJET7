@@ -308,18 +308,19 @@ def main():
         st.write("customer_value")
         st.write(customer_value)
 
-        # Create bar chart with two colors
+
+        # Create a bar chart
         fig, ax = plt.subplots()
-        ax.bar(full_data_values.index, full_data_values, color='gray', alpha=0.7, label='All Clients')
-        ax.bar(customer_index, customer_value, color='red', label='Current Customer')
+        ax.bar(range(len(full_data_values)), full_data_values, color='gray', alpha=0.7, label='All Clients')
+        ax.bar(len(full_data_values) - 1, customer_value, color='red', label='Current Customer')  # Last index for customer value
         ax.set_xlabel('Customer Index')
-        ax.set_ylabel(selected_feature)
-        ax.set_title(f'{selected_feature} Distribution')
+        ax.set_ylabel('Value')
+        ax.set_title('Distribution of a Feature')
         ax.legend()
         plt.tight_layout()
-        st.pyplot(fig)
+        st.pyplot(plt.gcf())
 
-    
+            
         # # Create line plot with highlighting
         # plt.plot(full_data_values, color='gray', label='All Clients', alpha=0.7) # Add transparency for better visibility
          
