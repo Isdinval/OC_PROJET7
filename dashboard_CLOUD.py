@@ -295,12 +295,13 @@ def main():
         employment_duration_years = -input_data_copy.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
 
         gender_pronoun = "He" if input_data_copy['CODE_GENDER'] == 'M' else "She"
+        gender2_pronoun = "his" if input_data_copy['CODE_GENDER'] == 'M' else "her"
         education_level = input_data_copy['NAME_EDUCATION_TYPE'].lower()
         family_status = input_data_copy['NAME_FAMILY_STATUS'].lower()
         housing_type = input_data_copy['NAME_HOUSING_TYPE'].lower()
 
         customer_description = f"""
-        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data_copy['NAME_EDUCATION_TYPE']}** who works in the **{input_data_copy['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data_copy['NAME_CONTRACT_TYPE'].lower()}** loan. **{gender_pronoun.capitalize()}** income is **{input_data_copy['AMT_INCOME_TOTAL']}** €. 
+        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data_copy['NAME_EDUCATION_TYPE']}** who works in the **{input_data_copy['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data_copy['NAME_CONTRACT_TYPE'].lower()}** loan. **{gender2_pronoun.capitalize()}** income is **{input_data_copy['AMT_INCOME_TOTAL']}** €. 
         """
         st.write(customer_description)
         
