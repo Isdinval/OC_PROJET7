@@ -334,61 +334,14 @@ def main():
 
 
 
-        # =========================================================================
-        # BIVARIATE GRAPHS
-        # ========================================================================
-        # Feature selection (assuming UI elements are already defined)
-        all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
-        feature1 = st.selectbox('Select Feature 1:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))
-        feature2 = st.selectbox('Select Feature 2:', all_features.columns, index=all_features.columns.get_loc('AMT_ANNUITY'))
 
-        
-        # Data preparation for bivariate plot
-        def prepare_bivariate_data(customer_data, feature1, feature2):
-            # Select and prepare features
-            feature1_values = customer_data[feature1]
-            feature2_values = customer_data[feature2]
-        
-            return feature1_values, feature2_values
-        
-        # Bivariate plot generation
-        def generate_bivariate_plot(feature1_values, feature2_values, customer_data, sk_id_curr):
-            import seaborn as sns
-            # Extract data for the current customer
-            customer_data = customer_data[customer_data['SK_ID_CURR'] == sk_id_curr]
-            customer_feature1 = customer_data[feature1].iloc[0]
-            customer_feature2 = customer_data[feature2].iloc[0]
-
-
-
-            # Create the plot
-            sns.scatterplot(x=feature1_values, y=feature2_values)
-            plt.xlabel(feature1)
-            plt.ylabel(feature2)
-            plt.title(f"Bivariate Analysis: {feature1} vs. {feature2}")
-            
-            # Highlight the current customer with a red point
-            plt.scatter(customer_feature1, customer_feature2, color='red', marker='o', label='Current Customer')
-            plt.legend()
-
-            # Customize and display the plot
-            st.pyplot(plt.gcf())
-        
-
-        
-        # Generate bivariate plot when a button is clicked
-        # if st.button("Generate Bivariate Plot"):
-
-        feature1_values, feature2_values = prepare_bivariate_data(customer_data_copy, feature1, feature2)
-        generate_bivariate_plot(feature1_values, feature2_values, customer_data, sk_id_curr)
 
         
         # =========================================================================
         # COMPARATIVE ANALYSIS USING GRAPHS
         # ========================================================================
-        # Generate graph
         st.header('Comparative Analysis')
-       
+
         # Get all features (assuming numerical features)
         all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
         # Filter controls
@@ -446,7 +399,65 @@ def main():
 
 
         
+        # =========================================================================
+        # BIVARIATE GRAPHS
+        # ========================================================================
+        
+        # Feature selection (assuming UI elements are already defined)
+        all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
+        feature1 = st.selectbox('Select Feature 1:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))
+        feature2 = st.selectbox('Select Feature 2:', all_features.columns, index=all_features.columns.get_loc('AMT_ANNUITY'))
 
+        feature1_description = feature_descriptions[feature_descriptions["Row"] == feature1]["Description"].iloc[0]         # Find description for the selected feature
+        st.write(f"Description de la feature : **{feature1_description}**")
+        feature2_description = feature_descriptions[feature_descriptions["Row"] == feature2]["Description"].iloc[0]         # Find description for the selected feature
+        st.write(f"Description de la feature : **{feature2_description}**")
+
+
+
+
+        
+        # Data preparation for bivariate plot
+        def prepare_bivariate_data(customer_data, feature1, feature2):
+            # Select and prepare features
+            feature1_values = customer_data[feature1]
+            feature2_values = customer_data[feature2]
+        
+            return feature1_values, feature2_values
+        
+        # Bivariate plot generation
+        def generate_bivariate_plot(feature1_values, feature2_values, customer_data, sk_id_curr):
+            import seaborn as sns
+            # Extract data for the current customer
+            customer_data = customer_data[customer_data['SK_ID_CURR'] == sk_id_curr]
+            customer_feature1 = customer_data[feature1].iloc[0]
+            customer_feature2 = customer_data[feature2].iloc[0]
+
+
+
+            # Create the plot
+            sns.scatterplot(x=feature1_values, y=feature2_values)
+            plt.xlabel(feature1)
+            plt.ylabel(feature2)
+            plt.title(f"Bivariate Analysis: {feature1} vs. {feature2}")
+            
+            # Highlight the current customer with a red point
+            plt.scatter(customer_feature1, customer_feature2, color='red', marker='o', label='Current Customer')
+            ax.set_yscale('log')  # Set log scale for y-axis
+            ax.set_xscale('log')  # Set log scale for y-axis
+
+            plt.legend()
+
+            # Customize and display the plot
+            st.pyplot(plt.gcf())
+        
+
+        
+        # Generate bivariate plot when a button is clicked
+        # if st.button("Generate Bivariate Plot"):
+
+        feature1_values, feature2_values = prepare_bivariate_data(customer_data_copy, feature1, feature2)
+        generate_bivariate_plot(feature1_values, feature2_values, customer_data, sk_id_curr)
 
         
         
