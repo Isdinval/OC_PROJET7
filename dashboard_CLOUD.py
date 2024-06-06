@@ -283,8 +283,35 @@ def main():
         # Get the data for the selected customer
         input_data      = customer_data_preprocessed[customer_data_preprocessed['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
         input_data_copy = customer_data_copy[customer_data_copy['SK_ID_CURR'] == sk_id_curr].iloc[0].to_dict()
+        
+    
+        # =========================================================================
+        # CUSTOMERS BASIC INFORMATIONS
+        # =========================================================================
+        # Display customer information
+        st.subheader("Customer Information:")
+
+        age_years = -input_data_copy['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
+        employment_duration_years = -input_data_copy.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
+
+        gender_pronoun = "He" if input_data_copy['CODE_GENDER'] == 'M' else "She"
+        gender2_pronoun = "his" if input_data_copy['CODE_GENDER'] == 'M' else "her"
+        education_level = input_data_copy['NAME_EDUCATION_TYPE'].lower()
+        family_status = input_data_copy['NAME_FAMILY_STATUS'].lower()
+        housing_type = input_data_copy['NAME_HOUSING_TYPE'].lower()
+
+        customer_description = f"""
+        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data_copy['NAME_EDUCATION_TYPE']}** who works in the **{input_data_copy['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data_copy['NAME_CONTRACT_TYPE'].lower()}** loan. **{gender2_pronoun.capitalize()}** income is **{input_data_copy['AMT_INCOME_TOTAL']}** €. 
+        """
+        st.write(customer_description)
+        
+        loan_description = f"""
+        The loan asked if for **{input_data_copy['AMT_CREDIT']}** €, and the annuity asked are **{input_data_copy['AMT_ANNUITY']}** €. 
+        """
+        st.write(loan_description)
 
 
+        
         # =========================================================================
         # COMPARATIVE ANALYSIS USING GRAPHS
         # ========================================================================
@@ -330,48 +357,7 @@ def main():
         ax.legend()
         plt.tight_layout()
         st.pyplot(plt.gcf())
-
-            
-        # # Create line plot with highlighting
-        # plt.plot(full_data_values, color='gray', label='All Clients', alpha=0.7) # Add transparency for better visibility
-         
-        # # Highlight current customer with red dot
-        # plt.scatter(customer_index, customer_value, marker='o', color='red', s=100, label='Current Customer') # Adjust marker size (s)
-         
-        # plt.xlabel('Customer Index')
-        # plt.ylabel(selected_feature)
-        # plt.title(f'{selected_feature} Distribution')
-        # plt.legend()
-        # plt.tight_layout()
-        # st.pyplot(plt.gcf())
-
-
-    
-        # =========================================================================
-        # CUSTOMERS BASIC INFORMATIONS
-        # =========================================================================
-        # Display customer information
-        st.subheader("Customer Information:")
-
-        age_years = -input_data_copy['DAYS_BIRTH'] // 365  # Calculate age from DAYS_BIRTH
-        employment_duration_years = -input_data_copy.get('DAYS_EMPLOYED', 0) // 365  # Calculate employment duration from DAYS_EMPLOYED
-
-        gender_pronoun = "He" if input_data_copy['CODE_GENDER'] == 'M' else "She"
-        gender2_pronoun = "his" if input_data_copy['CODE_GENDER'] == 'M' else "her"
-        education_level = input_data_copy['NAME_EDUCATION_TYPE'].lower()
-        family_status = input_data_copy['NAME_FAMILY_STATUS'].lower()
-        housing_type = input_data_copy['NAME_HOUSING_TYPE'].lower()
-
-        customer_description = f"""
-        **{gender_pronoun.capitalize()}** is a **{age_years}** years old **{input_data_copy['NAME_EDUCATION_TYPE']}** who works in the **{input_data_copy['NAME_INCOME_TYPE']}** sector. **{gender_pronoun.capitalize()}** lives in a **{housing_type}** and is currently **{employment_duration_years}** years into employment. **{gender_pronoun.capitalize()}** is **{family_status}** and has applied for a **{input_data_copy['NAME_CONTRACT_TYPE'].lower()}** loan. **{gender2_pronoun.capitalize()}** income is **{input_data_copy['AMT_INCOME_TOTAL']}** €. 
-        """
-        st.write(customer_description)
         
-        loan_description = f"""
-        The loan asked if for **{input_data_copy['AMT_CREDIT']}** €, and the annuity asked are **{input_data_copy['AMT_ANNUITY']}** €. 
-        """
-        st.write(loan_description)
-
         
         # =========================================================================
         # PREDICTION USING MODEL FOR SELECTED CUSTOMER
