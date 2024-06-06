@@ -400,6 +400,7 @@ def main():
         # BIVARIATE GRAPHS
         # ========================================================================
         # Feature selection (assuming UI elements are already defined)
+        all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
         feature1 = st.selectbox('Select Feature 1:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))
         feature2 = st.selectbox('Select Feature 2:', all_features.columns, index=all_features.columns.get_loc('AMT_ANNUITY'))
 
@@ -411,8 +412,6 @@ def main():
             # Select and prepare features
             feature1_values = customer_data[feature1]
             feature2_values = customer_data[feature2]
-            # Handle any preprocessing if needed
-            # ...
         
             return feature1_values, feature2_values
         
