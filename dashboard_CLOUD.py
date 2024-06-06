@@ -296,7 +296,8 @@ def main():
          
         # Filter controls
         selected_feature = st.selectbox('Select Feature:', all_features.columns)
-         
+        selected_feature = st.selectbox('Select Feature:', all_features.columns, index=all_features.columns.get_loc('AMT_INCOME_TOTAL'))  # Set default
+
         # Filter data based on selected feature
         filtered_data = customer_data_copy.copy() # Avoid modifying original data
          
