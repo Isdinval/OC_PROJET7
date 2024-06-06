@@ -288,38 +288,38 @@ def main():
         # =========================================================================
         # COMPARATIVE ANALYSIS USING GRAPHS
         # =========================================================================
-        # Generate graph
-        st.header('Comparative Analysis')
-        
-        # Get all features (assuming numerical features)
-        all_features = customer_data_copy.select_dtypes(include=[np.number])  # Adjust for categorical features if needed
-        
-        # Filter controls
-        selected_feature = st.selectbox('Select Feature:', all_features.columns)
-        
-        # Filter data based on selected feature
-        filtered_data = customer_data_copy.copy()  # Avoid modifying original data
-        
-        # Separate data for full dataset and current customer
-        full_data_values = customer_data_copy[selected_feature]
-        customer_value = customer_data_copy[selected_feature].iloc[0]
-        
-        # Create bar chart with highlighting
-        plt.figure(figsize=(10, 10))  # Adjust figure size for better visualization
-        
-        # Plot full dataset data with a grey color
-        plt.bar(range(len(full_data_values)), full_data_values, color='gray', alpha=0.7, label='All Clients')
-        
-        # Highlight current customer with a red bar
-        plt.bar(customer_index, customer_value, color='red', label='Current Customer')
-        
-        plt.xlabel('Customer Index')
-        plt.ylabel(selected_feature)
-        plt.title(f'{selected_feature} Distribution')
-        plt.xticks(range(len(full_data_values)), rotation=45, ha='right')  # Rotate x-axis labels for better readability if many customers
-        plt.legend()
-        plt.tight_layout()
-        st.pyplot(plt.gcf())
+        # Generate graph
+        st.header('Comparative Analysis')
+         
+        # Get all features (assuming numerical features)
+        all_features = customer_data_copy.select_dtypes(include=[np.number]) # Adjust for categorical features if needed
+         
+        # Filter controls
+        selected_feature = st.selectbox('Select Feature:', all_features.columns)
+         
+        # Filter data based on selected feature
+        filtered_data = customer_data_copy.copy() # Avoid modifying original data
+         
+        # Separate data for full dataset and current customer
+        full_data_values = customer_data_copy[selected_feature]
+        customer_value = customer_data_copy[selected_feature].iloc[0]
+        st.write("full_data_values")
+        st.write(full_data_values)
+        st.write("customer_value")
+        st.write(customer_value)
+         
+        # Create line plot with highlighting
+        plt.plot(full_data_values, color='gray', label='All Clients', alpha=0.7) # Add transparency for better visibility
+         
+        # Highlight current customer with red dot
+        plt.scatter(customer_index, customer_value, marker='o', color='red', s=100, label='Current Customer') # Adjust marker size (s)
+         
+        plt.xlabel('Customer Index')
+        plt.ylabel(selected_feature)
+        plt.title(f'{selected_feature} Distribution')
+        plt.legend()
+        plt.tight_layout()
+        st.pyplot(plt.gcf())
 
     
         # =========================================================================
