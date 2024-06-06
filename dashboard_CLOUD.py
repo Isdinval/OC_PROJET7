@@ -410,13 +410,13 @@ def main():
         # st.markdown("---")
         # st.write(f"The probability of default on the loan is estimated to be {probability_class1 * 100:.2f}% (Threshold: {optimal_threshold * 100:.2f}%).")
 
-
+        # FF1708 1B8720
 
         st.write(optimal_threshold * 100)
         streamviz.gauge(
             probability_class1, gSize="LRG", gTitle="The Probability of Loan Default Estimated (Treshold: 63.64%)", sFix="%",
-            grLow=0, grMid=optimal_threshold * 100, gcLow="#1B8720", 
-            gcMid="#FF1708", gcHigh="#FF1708")
+            grLow=0, grMid=optimal_threshold * 100, gcLow="#FF1708", 
+            gcMid="#FF1708", gcHigh="#1B8720")
 
 
 
