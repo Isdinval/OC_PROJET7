@@ -8,3 +8,4 @@ scikit-learn
 xgboost
 scipy
 plotly
+plotly.graph_objects
