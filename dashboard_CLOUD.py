@@ -324,8 +324,8 @@ def main():
         
         # Create bar chart with bins
         fig, ax = plt.subplots()
-        ax.bar(bins_all[:-1], counts_all, color='gray', alpha=0.7, label='All Clients')
-        ax.bar(bins_all[customer_bin_index], counts_all, color='red', label='Current Customer')  # Use customer_bin_index
+        ax.barh(bins_all[:-1], counts_all, color='gray', alpha=0.7, label='All Clients')
+        ax.barh(bins_all[customer_bin_index], counts_all, color='red', label='Current Customer')  # Use customer_bin_index
         ax.set_xlabel(selected_feature)  # Adjust label based on feature
         ax.set_ylabel('Count')
         ax.set_title(f'Distribution of {selected_feature} (Binned)')
