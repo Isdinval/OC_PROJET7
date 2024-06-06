@@ -281,8 +281,8 @@ def main():
     # Create bars with highlighting
     bar_width = 0.3  # Adjust bar width as needed (try smaller values)
     index = np.arange(len(full_data_bins[:-1]))
+    plt.bar(index + bar_width/2, customer_count, bar_width, color='red', label='Current Customer')
     plt.bar(index - bar_width/2, full_data_counts, bar_width, color='gray', label='All Clients')
-    plt.bar(index + bar_width/2, customer_count, 0.5, color='red', label='Current Customer')
     plt.xlabel(selected_feature)
     plt.ylabel('Frequency')
     plt.title(f'{selected_feature} Distribution')
