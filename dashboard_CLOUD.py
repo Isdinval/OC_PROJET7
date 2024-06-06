@@ -264,8 +264,13 @@ def main():
     # Preprocess Data
     customer_data_copy = customer_data
     customer_data_preprocessed = preprocess_dataframe(customer_data)
+
+    
     # Remove DAYS EMPLOTYED ANOMALIES
-    customer_data_preprocessed = customer_data_preprocessed['DAYS_EMPLOYED'].replace({365243: np.nan}, inplace = True)
+    # Exclude the specific value from mean calculation (assuming it's unique)
+    filtered_data = customer_data_preprocessed[customer_data_preprocessed['DAYS_EMPLOYED'] != 365243]
+    mean_days_employed = filtered_data['DAYS_EMPLOYED'].mean()
+    customer_data_preprocessed['DAYS_EMPLOYED'].replace(365243, mean_days_employed, inplace=True)
 
 
 
