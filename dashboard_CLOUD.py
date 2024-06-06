@@ -412,7 +412,6 @@ def main():
 
         # FF1708 1B8720
 
-        st.write(optimal_threshold * 100)
         streamviz.gauge(
             probability_class1, gSize="LRG", gTitle="Probability of Loan Default (Treshold: 63.64%)", sFix="%",
             grLow=0, grMid=optimal_threshold, gcLow="#1B8720", 
@@ -500,8 +499,12 @@ def main():
             # Button to make a new prediction with modified data
             if st.button("Re-Predict with Modified Features"):
                 probability_class1, prediction_label = make_prediction(modified_input_data, model, optimal_threshold)
-                st.write(f"With the modified features, the probability of default on the loan is now estimated to be {probability_class1 * 100:.2f}% (Threshold: {optimal_threshold * 100:.2f}%).")
-    
+                # st.write(f"With the modified features, the probability of default on the loan is now estimated to be {probability_class1 * 100:.2f}% (Threshold: {optimal_threshold * 100:.2f}%).")
+                streamviz.gauge(
+                    probability_class1, gSize="LRG", gTitle="Probability of Loan Default (Treshold: 63.64%)", sFix="%",
+                    grLow=0, grMid=optimal_threshold, gcLow="#1B8720", 
+                    gcMid="#1B8720", gcHigh="#FF1708")
+
                 if prediction_label == "Accepted":
                     st.markdown("<p style='text-align: center; font-size: 40px; color: green;'>The loan application is approved.</p>", unsafe_allow_html=True)
                 else:
