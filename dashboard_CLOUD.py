@@ -339,14 +339,12 @@ def main():
 
         # Load feature descriptions (assuming customer_data_description is a Pandas DataFrame)
         feature_descriptions = customer_data_description
-        feature_descriptions['Combined_Info'] = feature_descriptions['Description'] + " - " + feature_descriptions['Special']         # Add a new column named 'Combined_Info' to descriptions DataFrame
-
 
         # Select feature
         all_features = list(feature_descriptions["Row"])  # Assuming "Row" contains feature names
         
         # Find description for the selected feature
-        feature_description = feature_descriptions[feature_descriptions["Row"] == selected_feature]["Combined_Info"].iloc[0]
+        feature_description = feature_descriptions[feature_descriptions["Row"] == selected_feature]["Description"].iloc[0]
         
         # Print description
         st.write(f"Description de la feature : **{feature_description}**")
