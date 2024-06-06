@@ -272,7 +272,7 @@ def main():
     mean_days_employed = int(filtered_data['DAYS_EMPLOYED'].mean())
     st.write(mean_days_employed)
     customer_data_copy['DAYS_EMPLOYED']  = customer_data_copy['DAYS_EMPLOYED'].replace(365243, mean_days_employed, inplace=True)
-
+    st.write(customer_data_copy)
 
 
     # =========================================================================
