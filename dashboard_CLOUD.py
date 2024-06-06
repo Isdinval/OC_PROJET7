@@ -252,7 +252,40 @@ def main():
     customer_data_copy = customer_data
     customer_data_preprocessed = preprocess_dataframe(customer_data)
 
+
+    # =========================================================================
+    # COMPARATIVE ANALYSIS USING GRAPHS 
+    # =========================================================================
+    # Get all features (assuming numerical features)
+    all_features = customer_data_preprocessed.select_dtypes(include=[np.number])  # Adjust for categorical features if needed
     
+    # Filter controls
+    selected_feature = st.sidebar.selectbox('Select Feature:', all_features.columns)
+    
+    # Filter data based on selected feature
+    filtered_data = customer_data_preprocessed.copy()  # Avoid modifying original data
+    
+    if selected_feature != 'All Clients':
+      # Assuming a numerical feature is selected (adjust for categorical features)
+      filtered_data = filtered_data[filtered_data[selected_feature] <= customer_data_preprocessed[selected_feature].iloc[0]]
+    
+    
+    # Generate graph
+    st.header('Comparative Analysis')
+    
+    # Bar chart with highlighting
+    customer_value = customer_data_preprocessed[selected_feature].iloc[0]
+    counts, bins = np.histogram(filtered_data[selected_feature])
+    
+    bar_colors = ['red' if val == customer_value else 'blue' for val in bins[:-1]]
+    plt.bar(bins[:-1], counts, color=bar_colors)
+    plt.xlabel(selected_feature)
+    plt.ylabel('Frequency')
+    plt.title(f'{selected_feature} Distribution')
+    plt.xlim(min(bins), max(bins))
+    plt.tight_layout()
+    st.pyplot(plt.gcf())
+        
 
     # =========================================================================
     # ADD Missing features Manually (due to preprocess) then re-order features
