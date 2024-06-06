@@ -397,6 +397,7 @@ def main():
         # =========================================================================
         # PREDICTION USING MODEL FOR SELECTED CUSTOMER
         # =========================================================================
+        st.header("Model Prediction - Probability of Default ")
         input_df = pd.DataFrame([input_data])
         probability_class1 = model.predict_proba(input_df)[:, 1]         # Get the raw prediction score
 
@@ -406,15 +407,15 @@ def main():
         # Convert probability to human-readable format
         prediction_label = "Refused" if probability_class1 >= optimal_threshold else "Accepted"
         # Display prediction result and probability
-        st.markdown("---")
-        st.write(f"The probability of default on the loan is estimated to be {probability_class1 * 100:.2f}% (Threshold: {optimal_threshold * 100:.2f}%).")
+        # st.markdown("---")
+        # st.write(f"The probability of default on the loan is estimated to be {probability_class1 * 100:.2f}% (Threshold: {optimal_threshold * 100:.2f}%).")
 
 
 
         st.write(optimal_threshold * 100)
         streamviz.gauge(
-            probability_class1, gSize="LRG", gTitle="Probability of Default (Treshold: 63.64%)", sFix="%",
-            grLow=0, grMid=optimal_threshold * 100, gcLow="#1B8720", 
+            probability_class1, gSize="LRG", gTitle="The Probability of Loan Default Estimated (Treshold: 63.64%)", sFix="%",
+            grLow=0, grMid=50, gcLow="#1B8720", 
             gcMid="#1B8720", gcHigh="#FF1708")
 
 
