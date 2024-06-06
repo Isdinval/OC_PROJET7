@@ -428,6 +428,9 @@ def main():
         # Bivariate plot generation
         def generate_bivariate_plot(feature1_values, feature2_values, customer_data, sk_id_curr):
             import seaborn as sns
+            # Clear the current figure before displaying the new one
+            plt.clf()
+
             # Extract data for the current customer
             customer_data = customer_data[customer_data['SK_ID_CURR'] == sk_id_curr]
             customer_feature1 = customer_data[feature1].iloc[0]
