@@ -197,7 +197,6 @@ feature_names = feature_names_from_Model
 
 # Load Test DATA
 customer_data = load_test_data()
-customer_data['DAYS_EMPLOYED'].replace({365243: np.nan}, inplace = True)
 customer_data_description = load_test_data_description()
 
 # Optimal threshold from MLflow
@@ -265,6 +264,8 @@ def main():
     # Preprocess Data
     customer_data_copy = customer_data
     customer_data_preprocessed = preprocess_dataframe(customer_data)
+    # Remove DAYS EMPLOTYED ANOMALIES
+    customer_data_preprocessed = customer_data_preprocessed['DAYS_EMPLOYED'].replace({365243: np.nan}, inplace = True)
 
 
 
