@@ -525,7 +525,6 @@ def main():
             # TOP 10 POSITIVE OR NEGATIVE FEATURES
             # TABLE and MODIFICATION OF VALUES
             # =========================================================================
-            st.subheader("IV.3. Modify Features Value & Re-Predict")
             # Create two columns for the plots
             col1, col2 = st.columns(2)
     
