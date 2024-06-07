@@ -247,9 +247,9 @@ def main():
     st.title("Credit Scoring Dashboard")
     st.write("Welcome to the Credit Scoring Dashboard! Use the form below to make predictions.")
     # IMAGE PROJECT BANNER
-    col1, col2, col3 = st.columns([1, 3, 1])  # Adjust column ratios as needed
-    with col2:
-        st.image("P7_Banner.png", width=800)  # Adjust width as desired
+    # col1, col2, col3 = st.columns([1, 3, 1])  # Adjust column ratios as needed
+    # with col2:
+    st.image("P7_Banner.png", width=800)  # Adjust width as desired
 
 
     # =========================================================================
