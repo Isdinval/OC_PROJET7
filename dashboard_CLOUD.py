@@ -250,7 +250,6 @@ def main():
     # =========================================================================
     # EXPLAINABILITY SECTIONS
     # =========================================================================
-    st.header("I. Model Explanation")
     explainability_sections = """ 
     This loan approval prediction model is an XGBoost classifier. XGBoost stands for eXtreme Gradient Boosting, a powerful machine learning algorithm that combines the strengths of multiple decision trees to make more accurate predictions. It's known for its efficiency, scalability, and ability to handle complex relationships between features.
     The model analyzes various customer attributes, such as income, credit history, and debt-to-income ratio, to estimate the probability of loan default. The model's output is a probability score between 0% and 100%, where a lower score indicates a lower risk of the borrower defaulting on the loan.
@@ -258,7 +257,7 @@ def main():
     st.write(explainability_sections)
 
 
-
+    st.header("I. Choice of the Customer in the Dataset Test")
     # Input field for SK_ID_CURR
     sk_id_curr = st.number_input('Enter SK_ID_CURR (ex: 100001 or 101268):', min_value=customer_data['SK_ID_CURR'].min(), max_value=customer_data['SK_ID_CURR'].max())
 
