@@ -246,7 +246,11 @@ def main():
     # Set page title
     st.title("Credit Scoring Dashboard")
     st.write("Welcome to the Credit Scoring Dashboard! Use the form below to make predictions.")
-    st.image("P7_Banner.png", width=400)
+    # IMAGE PROJECT BANNER
+    col1, col2, col3 = st.columns([1, 3, 1])  # Adjust column ratios as needed
+    with col2:
+        st.image("P7_Banner.png", width=800)  # Adjust width as desired
+
 
     # =========================================================================
     # EXPLAINABILITY SECTIONS
@@ -256,9 +260,6 @@ def main():
     The model analyzes various customer attributes, such as income, credit history, and debt-to-income ratio, to estimate the probability of loan default. The model's output is a probability score between 0% and 100%, where a lower score indicates a lower risk of the borrower defaulting on the loan.
     """
     
-    col1, col2, col3 = st.columns([1, 3, 1])  # Adjust column ratios as needed
-    with col2:
-        st.image("P7_Banner.png", width=800)  # Adjust width as desired
 
 
     st.header("I. Choice of the Customer in the Dataset Test")
