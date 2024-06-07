@@ -246,7 +246,8 @@ def main():
     # Set page title
     st.title("Credit Scoring Dashboard")
     st.write("Welcome to the Credit Scoring Dashboard! Use the form below to make predictions.")
-    
+    st.image("16794938722698_Data%20Scientist-P7-01-banner.png", width=400)
+
     # =========================================================================
     # EXPLAINABILITY SECTIONS
     # =========================================================================
