@@ -249,7 +249,7 @@ def main():
     # IMAGE PROJECT BANNER
     # col1, col2, col3 = st.columns([1, 3, 1])  # Adjust column ratios as needed
     # with col2:
-    st.image("P7_Banner.png", width=650)  # Adjust width as desired
+    st.image("P7_Banner.png", width=700)  # Adjust width as desired
 
 
     # =========================================================================
